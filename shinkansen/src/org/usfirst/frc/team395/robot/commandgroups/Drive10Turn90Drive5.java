@@ -1,6 +1,7 @@
 package org.usfirst.frc.team395.robot.commandgroups;
 
 import org.usfirst.frc.team395.robot.commands.DriveFeet;
+import org.usfirst.frc.team395.robot.commands.TurnDegrees;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,8 +12,8 @@ public class Drive10Turn90Drive5 extends CommandGroup {
 
     public Drive10Turn90Drive5() {
     	addSequential(new DriveFeet(10), 4);
-    	//TODO: add turn 90
-    	//TODO: add drive 5
+    	addSequential(new TurnDegrees(90), 2);
+    	addSequential(new DriveFeet(5), 2);
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

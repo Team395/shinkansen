@@ -5,12 +5,14 @@ import org.usfirst.frc.team395.robot.Robot;
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class DrivetrainGyro extends Subsystem {
+public class DrivetrainGyro extends Subsystem implements PIDSource {
 	PigeonIMU pigeon = new PigeonIMU(Robot.drivetrain.getGyroTalon());
 	double lastResponse = -395;
 	
@@ -40,5 +42,23 @@ public class DrivetrainGyro extends Subsystem {
     	
     	return lastResponse;
     }
+
+	@Override
+	public void setPIDSourceType(PIDSourceType pidSource) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public PIDSourceType getPIDSourceType() {
+		// TODO Auto-generated method stub
+		return PIDSourceType.kDisplacement;
+	}
+
+	@Override
+	public double pidGet() {
+		// TODO Auto-generated method stub
+		return getAngleZ();
+	}
 }
 
