@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
 	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
+	public static Elevator elevator = new Elevator();
 	
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();

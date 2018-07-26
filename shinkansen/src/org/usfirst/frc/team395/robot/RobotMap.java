@@ -25,6 +25,7 @@ public abstract class RobotMap {
 	// public static int rangefinderModule = 1;
 	public static int leftStick = 0;
 	public static int rightStick = 0;
+	public static int xboxController = 0;
 	
 	public static class Drive {
 		public static int leftLeaderTalon = 0;
@@ -37,5 +38,10 @@ public abstract class RobotMap {
 		public static int leftEncoderTalon = 0;
 		public static int rightEncoderTalon = 0;
 		public static int gyroTalon = 0;
+	}
+	
+	public static class Elevator {
+		public static int winchControllerTalon = 0;
+		public static int bottomLimitSwitch = 0;
 	}
 }

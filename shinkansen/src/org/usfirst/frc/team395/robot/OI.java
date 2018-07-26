@@ -7,7 +7,15 @@
 
 package org.usfirst.frc.team395.robot;
 
+import org.usfirst.frc.team395.robot.commands.*;
+import org.usfirst.frc.team395.robot.commands.ElevatorPreset.PresetHeight;
+import org.usfirst.frc.team395.robot.triggers.*;
+
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,6 +24,23 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 	private Joystick leftStick = new Joystick(RobotMap.leftStick);
 	private Joystick rightStick = new Joystick(RobotMap.rightStick);
+	private XboxController xboxController = new XboxController(RobotMap.xboxController);
+	
+	ElevatorTrigger elevatorTrigger = new ElevatorTrigger();
+	Button highScaleHeight = new JoystickButton(xboxController, 4);
+	Button normalScaleHeight = new JoystickButton(xboxController, 2);
+	Button lowScaleHeight = new JoystickButton(xboxController, 1);
+	Button switchHeight = new JoystickButton(xboxController, 3);
+	Button bottomHeight = new JoystickButton(xboxController, 9);
+	
+	OI() {
+		elevatorTrigger.whileActive(new ElevatorJoystick());
+		highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
+		normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
+		lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
+		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
+		bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
+	}
 	
 	public double getLeftY() {
 		return leftStick.getY();
@@ -23,6 +48,10 @@ public class OI {
 	
 	public double getRightY() {
 		return rightStick.getY();
+	}
+	
+	public double getElevatorThrottle() {
+		return xboxController.getY(Hand.kLeft);	
 	}
 	
 	//// CREATING BUTTONS
@@ -52,4 +81,6 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	
+	
 }
