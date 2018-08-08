@@ -1,6 +1,7 @@
 package org.usfirst.frc.team395.robot.subsystems;
 
 import org.usfirst.frc.team395.robot.Robot;
+import org.usfirst.frc.team395.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -38,26 +39,26 @@ public class DrivetrainEncoders extends Subsystem implements PIDSource {
 	    	case VELOCITY:
 	    		switch(robotSide) {
 	    			case LEFT:
-	    				return Robot.drivetrain.getLeftEncoderTalon().getSelectedSensorVelocity(0);
+	    				return Robot.talonMap.getTalonByID(RobotMap.Sensors.leftEncoderTalon).getSelectedSensorVelocity(0);
 	    			case RIGHT:
 	    			default:
-	    				return Robot.drivetrain.getRightEncoderTalon().getSelectedSensorVelocity(0);
+	    				return Robot.talonMap.getTalonByID(RobotMap.Sensors.rightEncoderTalon).getSelectedSensorVelocity(0);
 	    		}
 	    	case DISPLACEMENT:
 			default:
 	    		switch(robotSide) {
 	    			case LEFT:
-						return Robot.drivetrain.getLeftEncoderTalon().getSelectedSensorPosition(0);
+						return Robot.talonMap.getTalonByID(RobotMap.Sensors.leftEncoderTalon).getSelectedSensorPosition(0);
 	    			case RIGHT:
 	    			default:
-	    				return Robot.drivetrain.getRightEncoderTalon().getSelectedSensorPosition(0);
+	    				return Robot.talonMap.getTalonByID(RobotMap.Sensors.rightEncoderTalon).getSelectedSensorPosition(0);
 	    		}
     	}
     }
     
     public void resetEncoderValues() {
-    	Robot.drivetrain.getLeftEncoderTalon().setSelectedSensorPosition(0, 0, 50);
-    	Robot.drivetrain.getRightEncoderTalon().setSelectedSensorPosition(0, 0, 50);
+    	Robot.talonMap.getTalonByID(RobotMap.Sensors.leftEncoderTalon).setSelectedSensorPosition(0, 0, 50);
+    	Robot.talonMap.getTalonByID(RobotMap.Sensors.rightEncoderTalon).setSelectedSensorPosition(0, 0, 50);
     }
     
     public double getAveragedPositions() {

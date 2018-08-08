@@ -1,5 +1,6 @@
 package org.usfirst.frc.team395.robot.subsystems;
 
+import org.usfirst.frc.team395.robot.Robot;
 import org.usfirst.frc.team395.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class Elevator extends PIDSubsystem {
 	// Initialize your subsystem here
-	WPI_TalonSRX winchController = new WPI_TalonSRX(RobotMap.Elevator.winchControllerTalon);
+	WPI_TalonSRX winchController = Robot.talonMap.getTalonByID(RobotMap.Elevator.winchControllerTalon);
 	DigitalInput bottomLimit = new DigitalInput(RobotMap.Elevator.bottomLimitSwitch);
 	// System constants (initial values)
 	double percentOffset = 0.19;
@@ -44,7 +45,7 @@ public class Elevator extends PIDSubsystem {
     
     public double getElevatorEncoder() {
     	//TODO: Do we want to accept a ValueType and return velocity as well?
-    	return winchController.getSelectedSensorPosition(0);
+    	return Robot.talonMap.getTalonByID(RobotMap.Sensors.winchEncoderTalon).getSelectedSensorPosition(0);
     }
     
     protected double returnPIDInput() {

@@ -38,6 +38,7 @@ public abstract class RobotMap {
 		public static int leftEncoderTalon = 0;
 		public static int rightEncoderTalon = 0;
 		public static int gyroTalon = 0;
+		public static int winchEncoderTalon = 0;
 	}
 	
 	public static class Elevator {

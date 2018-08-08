@@ -1,8 +1,6 @@
 package org.usfirst.frc.team395.robot.subsystems;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.usfirst.frc.team395.robot.Robot;
 import org.usfirst.frc.team395.robot.RobotMap;
 import org.usfirst.frc.team395.robot.commands.TankDrive;
 
@@ -17,12 +15,12 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  *
  */
 public class Drivetrain extends Subsystem implements PIDOutput {
-	WPI_TalonSRX leftLeader = new WPI_TalonSRX(RobotMap.Drive.leftLeaderTalon);
-	WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.Drive.rightLeaderTalon);
-	WPI_TalonSRX leftFollower = new WPI_TalonSRX(RobotMap.Drive.leftFollowerTalon);
-	WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.Drive.rightFollowerTalon);
 	
-	Map<Integer, WPI_TalonSRX> talonMap = new HashMap<Integer, WPI_TalonSRX>();
+	WPI_TalonSRX leftLeader = Robot.talonMap.getTalonByID(RobotMap.Drive.leftLeaderTalon);
+	WPI_TalonSRX leftFollower = Robot.talonMap.getTalonByID(RobotMap.Drive.leftFollowerTalon);
+	WPI_TalonSRX rightLeader = Robot.talonMap.getTalonByID(RobotMap.Drive.rightLeaderTalon);
+	WPI_TalonSRX rightFollower = Robot.talonMap.getTalonByID(RobotMap.Drive.rightFollowerTalon);
+
 	SpeedControllerGroup leftSpeedControllers = new SpeedControllerGroup(leftLeader, leftFollower);
 	SpeedControllerGroup rightSpeedControllers = new SpeedControllerGroup(rightLeader, rightFollower);
 	DifferentialDrive differentialDrive = new DifferentialDrive(leftSpeedControllers, rightSpeedControllers);
@@ -30,11 +28,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public Drivetrain() {
 		leftFollower.follow(leftLeader);
 		rightFollower.follow(rightLeader);
-		
-		talonMap.put(leftLeader.getDeviceID(), leftLeader);
-		talonMap.put(rightLeader.getDeviceID(), rightLeader);
-		talonMap.put(leftFollower.getDeviceID(), leftFollower);
-		talonMap.put(rightFollower.getDeviceID(), rightFollower);
 	}
 	
     // Put methods for controlling this subsystem
@@ -50,18 +43,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     	differentialDrive.tankDrive(leftSpeed, rightSpeed);
     }
     
-    public WPI_TalonSRX getLeftEncoderTalon() {
-    	return talonMap.get(RobotMap.Sensors.leftEncoderTalon);
-    }
-    
-    public WPI_TalonSRX getRightEncoderTalon() {
-    	return talonMap.get(RobotMap.Sensors.rightEncoderTalon);
-    }
-    
-    public WPI_TalonSRX getGyroTalon() {
-    	return talonMap.get(RobotMap.Sensors.gyroTalon);
-    }
-
 	@Override
 	public void pidWrite(double output) {
 		tankDrive(output, output);

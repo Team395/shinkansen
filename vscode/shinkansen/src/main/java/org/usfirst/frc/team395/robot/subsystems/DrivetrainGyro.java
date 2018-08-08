@@ -1,6 +1,7 @@
 package org.usfirst.frc.team395.robot.subsystems;
 
 import org.usfirst.frc.team395.robot.Robot;
+import org.usfirst.frc.team395.robot.RobotMap;
 
 import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -13,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DrivetrainGyro extends Subsystem implements PIDSource {
-	PigeonIMU pigeon = new PigeonIMU(Robot.drivetrain.getGyroTalon());
+	PigeonIMU pigeon = new PigeonIMU(Robot.talonMap.getTalonByID(RobotMap.Sensors.gyroTalon));
 	double lastResponse = -395;
 	
 	public static class GyroIndex {
