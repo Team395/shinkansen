@@ -53,7 +53,19 @@ public class OI {
 	public double getElevatorThrottle() {
 		return xboxController.getY(Hand.kLeft);	
 	}
-	
+    
+    public boolean getIntakeOpen() {
+        return xboxController.getBumper(Hand.kLeft);
+    }
+
+    public boolean getIntakeClose() {
+        return xboxController.getBumper(Hand.kRight);
+    }
+
+    public double getIntakeThrottle() {
+        return xboxController.getY(Hand.kRight);
+    }
+    
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

@@ -34,7 +34,8 @@ public class Robot extends TimedRobot {
 	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
 	public static Elevator elevator = new Elevator();
 	public static TalonMap talonMap = new TalonMap();
-	
+    public static Intake intake = new Intake();
+    
 	public static Compressor compressor = new Compressor();
 
 	Command autonomousCommand;
