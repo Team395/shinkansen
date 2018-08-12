@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team395.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,6 +35,8 @@ public class Robot extends TimedRobot {
 	public static Elevator elevator = new Elevator();
 	public static TalonMap talonMap = new TalonMap();
 	
+	public static Compressor compressor = new Compressor();
+
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -47,6 +50,8 @@ public class Robot extends TimedRobot {
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+
+		compressor.setClosedLoopControl(true);
 	}
 
 	/**
