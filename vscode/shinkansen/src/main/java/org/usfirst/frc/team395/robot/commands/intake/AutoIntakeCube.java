@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team395.robot.commands.intake;
 
-import java.util.concurrent.ScheduledExecutorService;
-
 import org.usfirst.frc.team395.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
