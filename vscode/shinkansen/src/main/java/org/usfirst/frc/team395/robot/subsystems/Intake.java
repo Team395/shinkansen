@@ -42,12 +42,12 @@ public class Intake extends Subsystem {
         closeSolenoid.set(true);
     }
 
-    public boolean getIntakeOpen() {
+    public boolean isIntakeOpen() {
         //TODO: Trustworthy enough? Maybe both/neither are pressurized?
         return openSolenoid.get();
     }
 
-    public boolean getCubeInIntake() {
+    public boolean isCubeInIntake() {
         return cubeDetectedSensor.get();
     }
     
