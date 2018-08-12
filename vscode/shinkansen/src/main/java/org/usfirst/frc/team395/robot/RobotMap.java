@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team395.robot;
 
-import javax.net.ssl.SSLEngineResult.Status;
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -53,6 +51,6 @@ public abstract class RobotMap {
 		public static int rightIntake = 0;
 		public static int openSolenoid = 0;
 		public static int closeSolenoid = 0;
-		public static int bannerSensor = 0;
+		public static int cubeDetectedSensor = 0;
 	}
 }
