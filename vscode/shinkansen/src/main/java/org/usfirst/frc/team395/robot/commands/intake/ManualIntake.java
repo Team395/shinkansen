@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ManualIntake extends Command {
     public ManualIntake() {
+        super("ManualIntake");
         requires(Robot.intake);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

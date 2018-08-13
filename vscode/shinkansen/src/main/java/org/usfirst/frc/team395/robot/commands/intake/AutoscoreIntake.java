@@ -24,6 +24,7 @@ public class AutoscoreIntake extends Command {
     }
 
     public AutoscoreIntake(double throttle) {
+        super("AutoscoreIntake");
         requires(Robot.intake);
         this.throttle = throttle;
         // Use requires() here to declare subsystem dependencies

@@ -14,11 +14,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class AutoCenterCube extends Command {
-    
+
     private Timer timer = new Timer();
     private static final double CENTER_TIME = 0.25;
     
     public AutoCenterCube() {
+        super("AutoCenterCube");
         requires(Robot.intake);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

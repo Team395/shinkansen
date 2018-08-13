@@ -18,6 +18,7 @@ public class RetainIntake extends Command {
     private Timer timer = new Timer();
 
     public RetainIntake() {
+        super("RetainIntake");
         requires(Robot.intake);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

@@ -9,6 +9,7 @@ package org.usfirst.frc.team395.robot;
 
 import org.usfirst.frc.team395.robot.commands.*;
 import org.usfirst.frc.team395.robot.commands.ElevatorPreset.PresetHeight;
+import org.usfirst.frc.team395.robot.commands.intake.*;
 import org.usfirst.frc.team395.robot.triggers.*;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -31,16 +32,32 @@ public class OI {
 	Button normalScaleHeight = new JoystickButton(xboxController, 2);
 	Button lowScaleHeight = new JoystickButton(xboxController, 1);
 	Button switchHeight = new JoystickButton(xboxController, 3);
-	Button bottomHeight = new JoystickButton(xboxController, 9);
-	
+    Button bottomHeight = new JoystickButton(xboxController, 9);
+    
+    ManualTrigger manualTrigger = new ManualTrigger();
+    Button autoscoreButton = new JoystickButton(xboxController, 10);
+    RetainTrigger retainTrigger = new RetainTrigger();
+    AutomaticTrigger automaticTrigger = new AutomaticTrigger();
+    ThresholdTrigger thresholdTrigger = new ThresholdTrigger();
+    Button toggleManual = new JoystickButton(xboxController, 8);
+
 	OI() {
+        //Elevator Triggers
 		elevatorTrigger.whileActive(new ElevatorJoystick());
 		highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
 		normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
 		lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
 		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
-		bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
-	}
+        bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
+        
+        //Intake Triggers
+        manualTrigger.whileActive(new ManualIntake());
+        autoscoreButton.whenPressed(new AutoscoreIntake());
+        retainTrigger.whenActive(new RetainIntake());
+        automaticTrigger.whenActive(new AutomaticIntake());
+        thresholdTrigger.whenActive(new AutomaticIntake());
+        toggleManual.whenPressed(new ToggleIntakeCommand());
+    }
 	
 	public double getLeftY() {
 		return leftStick.getY();

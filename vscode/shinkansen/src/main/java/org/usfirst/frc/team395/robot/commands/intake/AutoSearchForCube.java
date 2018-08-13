@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutoSearchForCube extends Command {
     public AutoSearchForCube() {
+        super("AutoSearchForCube");
         requires(Robot.intake);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

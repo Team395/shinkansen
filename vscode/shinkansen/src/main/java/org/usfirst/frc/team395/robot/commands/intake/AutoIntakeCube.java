@@ -19,6 +19,7 @@ public class AutoIntakeCube extends Command {
     private static final double INTAKE_TIME = 0.5;
 
     public AutoIntakeCube() {
+        super("AutoIntakeCube");
         requires(Robot.intake);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);

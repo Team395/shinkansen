@@ -23,7 +23,8 @@ public class Elevator extends PIDSubsystem {
 	final double bottomPositionInches = 0.0;
 	final double UNITS_PER_ROTATION = 4096;
 	final double CASCADE_FACTOR = 2; //TODO: Tune
-	final double DRUM_DIAMETER = 2; //TODO: Test
+    final double DRUM_DIAMETER = 2; //TODO: Test
+    public final static double INTAKE_THRESHOLD = 20; //TODO: Tune
 	
 	public Elevator() {
     	super(0, 0, 0);
@@ -102,5 +103,9 @@ public class Elevator extends PIDSubsystem {
     public void setElevatorSetpoint(double setpointInches) {
     	double setpointTicks = setpointInches * UNITS_PER_ROTATION / (CASCADE_FACTOR * Math.PI * DRUM_DIAMETER);
     	setSetpoint(setpointTicks);
+    }
+
+    public boolean isElevatorAboveIntakeThreshold() { 
+        return getPosition() > INTAKE_THRESHOLD;
     }
 }
