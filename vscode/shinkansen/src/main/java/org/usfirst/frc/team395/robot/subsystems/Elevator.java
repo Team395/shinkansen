@@ -18,7 +18,9 @@ public class Elevator extends PIDSubsystem {
 	DigitalInput bottomLimit = new DigitalInput(RobotMap.Elevator.bottomLimitSwitch);
 	// System constants (initial values)
 	double percentOffset = 0.19;
-	double minimumOutput = 0.0;
+	double minimumOutput = 0;
+	final double topPositionUnits = 20000;
+	final double bottomPositionUnits = 0;
 	final double topPositionInches = 100.0;
 	final double bottomPositionInches = 0.0;
 	final double UNITS_PER_ROTATION = 4096;
@@ -26,21 +28,26 @@ public class Elevator extends PIDSubsystem {
 	final double DRUM_DIAMETER = 2; //TODO: Test
 	
 	public Elevator() {
-    	super(0, 0, 0);
+    	super(0.1, 0, 0.02);
     	
     	//Minimum and maximum percent outputs
-    	setOutputRange(minimumOutput, 1);
+		setOutputRange(minimumOutput, 1);
+		setInputRange(bottomPositionUnits, topPositionUnits);
     	
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
         // enable() - Enables the PID controller.
-    }
+	}
+	
+	public void initializeSystem() {
+		homeEncoder();
+		enable();
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	// TODO: Pick default command
     }
     
     public double getElevatorEncoder() {
@@ -57,13 +64,18 @@ public class Elevator extends PIDSubsystem {
 
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
-    	if(bottomLimitPressed() && getSetpoint() == 0) {
-    		output += 0;
-    	}
-    	else {
-    		output += percentOffset;
-    	}
+		// e.g. yourMotor.set(output);
+		System.out.println("usePIDOutput: " + output + "\tpercentOffset: " + percentOffset + "\tbottomLimitPressed: "
+			+ bottomLimitPressed() + "\tgetSetpoint: " + getSetpoint()
+			+ "\tcurrentPosition: " + getElevatorEncoder());
+
+		output += percentOffset;
+		
+		if(bottomLimitPressed() && getSetpoint() == 0) {
+			output = 0;
+			homeEncoder();
+		}
+
 		winchController.set(output);
     }
     
@@ -92,15 +104,28 @@ public class Elevator extends PIDSubsystem {
     }
     
     public boolean bottomLimitPressed() {
-    	return bottomLimit.get();
+    	return !bottomLimit.get();
     }
     
     public void homeEncoder() {
-    	winchController.setSelectedSensorPosition(0, 0, 0);
+		Robot.talonMap.getTalonByID(RobotMap.Sensors.winchEncoderTalon).setSelectedSensorPosition(0, 0, 50);
     }
     
     public void setElevatorSetpoint(double setpointInches) {
-    	double setpointTicks = setpointInches * UNITS_PER_ROTATION / (CASCADE_FACTOR * Math.PI * DRUM_DIAMETER);
-    	setSetpoint(setpointTicks);
-    }
+		System.out.println("setpointInches: " + setpointInches + "\t currentPosition: " + getElevatorEncoder());
+    	double setpointUnits = convertInchesToUnits(setpointInches);
+    	setSetpoint(setpointUnits);
+	}
+	
+	public double convertUnitsToInches(double units) {
+		double inches = units * CASCADE_FACTOR * Math.PI * DRUM_DIAMETER / UNITS_PER_ROTATION;
+
+		return inches;
+	}
+
+	public double convertInchesToUnits(double inches) {
+		double units = inches * UNITS_PER_ROTATION / CASCADE_FACTOR / Math.PI / DRUM_DIAMETER;
+
+		return units;
+	}
 }

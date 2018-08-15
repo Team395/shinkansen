@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
+//TODO: Uncomment
+// import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
 import org.usfirst.frc.team395.robot.commands.*;
 import org.usfirst.frc.team395.robot.subsystems.*;
 
@@ -26,16 +27,18 @@ import org.usfirst.frc.team395.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 	public static ExampleSubsystem subsystem = new ExampleSubsystem();
-	public static OI oi;
+	
+	public static TalonMap talonMap = new TalonMap();
+	public static Elevator elevator = new Elevator();
+	public static OI oi = new OI();
+	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
+	//TODO: Uncomment
+	// public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
 	
 	public static Drivetrain drivetrain = new Drivetrain();
-	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
-	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
-	public static Elevator elevator = new Elevator();
-	public static TalonMap talonMap = new TalonMap();
 	
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	// SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,10 +46,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		oi.setUpTriggers();
+		elevator.initializeSystem();
+		// chooser.addDefault("Default Auto", new ExampleCommand());
+		// // chooser.addObject("My Auto", new MyAutoCommand());
+		// SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	/**
@@ -56,7 +60,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		//TODO: Remove
+		elevator.initializeSystem();
 	}
 
 	@Override
@@ -78,7 +83,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
-		autonomousCommand = new Drive10Turn90Drive5();
+		//autonomousCommand = new Drive10Turn90Drive5();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

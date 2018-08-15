@@ -22,37 +22,44 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	private static int INVERT = -1;
+
 	private Joystick leftStick = new Joystick(RobotMap.leftStick);
 	private Joystick rightStick = new Joystick(RobotMap.rightStick);
 	private XboxController xboxController = new XboxController(RobotMap.xboxController);
 	
-	ElevatorTrigger elevatorTrigger = new ElevatorTrigger();
-	Button highScaleHeight = new JoystickButton(xboxController, 4);
-	Button normalScaleHeight = new JoystickButton(xboxController, 2);
-	Button lowScaleHeight = new JoystickButton(xboxController, 1);
-	Button switchHeight = new JoystickButton(xboxController, 3);
-	Button bottomHeight = new JoystickButton(xboxController, 9);
-	
-	OI() {
-		elevatorTrigger.whileActive(new ElevatorJoystick());
-		highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
-		normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
-		lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
-		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
-		bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
-	}
-	
 	public double getLeftY() {
-		return leftStick.getY();
+		return INVERT * leftStick.getY();
 	}
 	
 	public double getRightY() {
-		return rightStick.getY();
+		return INVERT * rightStick.getY();
 	}
 	
 	public double getElevatorThrottle() {
-		return xboxController.getY(Hand.kLeft);	
+		return INVERT * xboxController.getY(Hand.kLeft);	
 	}
+	
+	 ElevatorTrigger elevatorTrigger;
+	// Button highScaleHeight = new JoystickButton(xboxController, 4);
+	// Button normalScaleHeight = new JoystickButton(xboxController, 2);
+	// Button lowScaleHeight = new JoystickButton(xboxController, 1);
+	// Button switchHeight = new JoystickButton(xboxController, 3);
+	// Button bottomHeight = new JoystickButton(xboxController, 9);
+	
+	OI() {
+	}
+	
+	public void setUpTriggers() {
+		elevatorTrigger = new ElevatorTrigger();
+		elevatorTrigger.whileActive(new ElevatorJoystick());
+	// 	highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
+	// 	normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
+	// 	lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
+	// 	switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
+	// 	bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
+	}
+	
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

@@ -24,25 +24,25 @@ public abstract class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	public static int leftStick = 0;
-	public static int rightStick = 0;
-	public static int xboxController = 0;
+	public static int rightStick = 1;
+	public static int xboxController = 2;
 	
 	public static class Drive {
-		public static int leftLeaderTalon = 0;
-		public static int rightLeaderTalon = 0;
-		public static int leftFollowerTalon = 0;
-		public static int rightFollowerTalon = 0;
+		public static int leftLeaderTalon = 1;
+		public static int rightLeaderTalon = 3;
+		public static int leftFollowerTalon = 2;
+		public static int rightFollowerTalon = 4;
 	}
 	
 	public static class Sensors {
 		public static int leftEncoderTalon = 0;
 		public static int rightEncoderTalon = 0;
 		public static int gyroTalon = 0;
-		public static int winchEncoderTalon = 0;
+		public static int winchEncoderTalon = 1;
 	}
 	
 	public static class Elevator {
-		public static int winchControllerTalon = 0;
-		public static int bottomLimitSwitch = 0;
+		public static int winchControllerTalon = 5;
+		public static int bottomLimitSwitch = 8;
 	}
 }
