@@ -13,10 +13,10 @@ public class ElevatorPreset extends Command {
 	
 	
 	public enum PresetHeight {	
-		HIGH_SCALE(80), 
-		NORMAL_SCALE(73.4),
-		LOW_SCALE(30.7),
-		SWITCH(15),
+		HIGH_SCALE(77), 
+		NORMAL_SCALE(70),
+		LOW_SCALE(61),
+		SWITCH(30),
 		BOTTOM(0);
 		//TODO: retune 
 		

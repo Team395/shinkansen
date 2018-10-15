@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
+//TODO: Uncomment
+// import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
 import org.usfirst.frc.team395.robot.commands.*;
 import org.usfirst.frc.team395.robot.subsystems.*;
 
@@ -27,19 +28,22 @@ import org.usfirst.frc.team395.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 	public static ExampleSubsystem subsystem = new ExampleSubsystem();
-	public static OI oi;
 	
-	public static Drivetrain drivetrain = new Drivetrain();
-	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
-	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
-	public static Elevator elevator = new Elevator();
 	public static TalonMap talonMap = new TalonMap();
     public static Intake intake = new Intake();
     
 	public static Compressor compressor = new Compressor();
 
+	public static Elevator elevator = new Elevator();
+	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
+	//TODO: Uncomment
+	// public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
+	
+	public static Drivetrain drivetrain = new Drivetrain();
+	public static OI oi = new OI();
+	
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	// SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -47,12 +51,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
-		chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
-
 		compressor.setClosedLoopControl(true);
+		oi.setUpTriggers();
+		// chooser.addDefault("Default Auto", new ExampleCommand());
+		// // chooser.addObject("My Auto", new MyAutoCommand());
+		// SmartDashboard.putData("Auto mode", chooser);
 	}
 
 	/**
@@ -84,8 +87,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
-		autonomousCommand = new Drive10Turn90Drive5();
-
+		//autonomousCommand = new Drive10Turn90Drive5();
+		elevator.initializeSystem();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -97,6 +100,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
+		elevator.initializeSystem();
 	}
 
 	/**
@@ -105,6 +109,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("Elevator Enabled", elevator.getPIDController().isEnabled());
+
 	}
 
 	@Override
@@ -113,6 +119,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		elevator.initializeSystem();
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
@@ -121,11 +128,13 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is called periodically during operator control.
 	 */
+	double setpointInches = 0;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("Elevator Trigger", oi.elevatorTrigger.get());
+		SmartDashboard.putString("Elevator Command", elevator.getCurrentCommandName());
 	}
-
 	/**
 	 * This function is called periodically during test mode.
 	 */

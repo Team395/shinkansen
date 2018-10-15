@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,30 +19,37 @@ public class Elevator extends PIDSubsystem {
 	DigitalInput bottomLimit = new DigitalInput(RobotMap.Elevator.bottomLimitSwitch);
 	// System constants (initial values)
 	double percentOffset = 0.19;
-	double minimumOutput = 0.0;
-	final double topPositionInches = 100.0;
-	final double bottomPositionInches = 0.0;
-	final double UNITS_PER_ROTATION = 4096;
-	final double CASCADE_FACTOR = 2; //TODO: Tune
-    final double DRUM_DIAMETER = 2; //TODO: Test
-    public final static double INTAKE_THRESHOLD = 20; //TODO: Tune
+	double minimumOutput = -0.19;
+	final static double topPositionInches = 80.0;
+	final static double bottomPositionInches = 0.0;
+	final static double topPositionUnits = convertInchesToUnits(topPositionInches);
+	final static double bottomPositionUnits = convertInchesToUnits(bottomPositionInches);
+	final static double UNITS_PER_ROTATION = 4096;
+	final static double CASCADE_FACTOR = 1.8; //TODO: Tune
+	final static double DRUM_DIAMETER = 2.41; 
+	final static double INTAKE_THRESHOLD = 15;
 	
 	public Elevator() {
-    	super(0, 0, 0);
-    	
+    	super(0.00025, 0.0, 0.00015);
+		
     	//Minimum and maximum percent outputs
-    	setOutputRange(minimumOutput, 1);
-    	
+		setOutputRange(minimumOutput, 1);
+		setInputRange(bottomPositionUnits, topPositionUnits);
+		setAbsoluteTolerance(convertInchesToUnits(2));
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
         // enable() - Enables the PID controller.
-    }
+	}
+	
+	public void initializeSystem() {
+		// homeEncoder();
+		enable();
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	// TODO: Pick default command
     }
     
     public double getElevatorEncoder() {
@@ -58,13 +66,21 @@ public class Elevator extends PIDSubsystem {
 
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
-        // e.g. yourMotor.set(output);
-    	if(bottomLimitPressed() && getSetpoint() == 0) {
-    		output += 0;
-    	}
-    	else {
-    		output += percentOffset;
-    	}
+		// e.g. yourMotor.set(output);
+		SmartDashboard.putNumber("PID Output", output);
+		SmartDashboard.putNumber("Current Position", convertUnitsToInches(getElevatorEncoder()));
+		SmartDashboard.putNumber("Current Setpoint", convertUnitsToInches(getSetpoint()));
+		//System.out.println("usePIDOutput: " + output + "\tpercentOffset: " + percentOffset + "\tbottomLimitPressed: "
+		//	+ bottomLimitPressed() + "\tgetSetpoint: " + getSetpoint()
+		//	+ "\tcurrentPosition: " + getElevatorEncoder());
+
+		output += percentOffset;
+		
+		if(bottomLimitPressed() && getSetpoint() == 0) {
+			output = 0;
+			homeEncoder();
+		}
+
 		winchController.set(output);
     }
     
@@ -93,19 +109,31 @@ public class Elevator extends PIDSubsystem {
     }
     
     public boolean bottomLimitPressed() {
-    	return bottomLimit.get();
+    	return !bottomLimit.get();
     }
     
     public void homeEncoder() {
-    	winchController.setSelectedSensorPosition(0, 0, 0);
+		Robot.talonMap.getTalonByID(RobotMap.Sensors.winchEncoderTalon).setSelectedSensorPosition(0, 0, 50);
     }
     
     public void setElevatorSetpoint(double setpointInches) {
-    	double setpointTicks = setpointInches * UNITS_PER_ROTATION / (CASCADE_FACTOR * Math.PI * DRUM_DIAMETER);
-    	setSetpoint(setpointTicks);
-    }
+    	double setpointUnits = convertInchesToUnits(setpointInches);
+    	setSetpoint(setpointUnits);
+	}
+	
+	public static double convertUnitsToInches(double units) {
+		double inches = units * CASCADE_FACTOR * Math.PI * DRUM_DIAMETER / UNITS_PER_ROTATION;
 
-    public boolean isElevatorAboveIntakeThreshold() { 
+		return inches;
+	}
+
+	public boolean isElevatorAboveIntakeThreshold() { 
         return getPosition() > INTAKE_THRESHOLD;
-    }
+	}
+	
+	public static double convertInchesToUnits(double inches) {
+		double units = inches * UNITS_PER_ROTATION / CASCADE_FACTOR / Math.PI / DRUM_DIAMETER;
+
+		return units;
+	}
 }

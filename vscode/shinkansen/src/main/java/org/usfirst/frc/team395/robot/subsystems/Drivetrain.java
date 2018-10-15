@@ -26,6 +26,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	DifferentialDrive differentialDrive = new DifferentialDrive(leftSpeedControllers, rightSpeedControllers);
 	
 	public Drivetrain() {
+		//rightSpeedControllers.setInverted(true);
 		leftFollower.follow(leftLeader);
 		rightFollower.follow(rightLeader);
 	}

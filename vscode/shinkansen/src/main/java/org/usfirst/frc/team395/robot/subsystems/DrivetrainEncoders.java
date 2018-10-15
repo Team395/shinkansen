@@ -72,19 +72,16 @@ public class DrivetrainEncoders extends Subsystem implements PIDSource {
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		// TODO Auto-generated method stub
 		return PIDSourceType.kDisplacement;
 	}
 
 	@Override
 	public double pidGet() {
-		// TODO Auto-generated method stub
 		return getAveragedPositions();
 	}
 }
