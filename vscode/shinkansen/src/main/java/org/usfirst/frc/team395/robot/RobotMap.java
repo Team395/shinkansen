@@ -43,6 +43,6 @@ public abstract class RobotMap {
 	
 	public static class Elevator {
 		public static int winchControllerTalon = 5;
-		public static int bottomLimitSwitch = 8;
+		public static int bottomLimitSwitch = 5;
 	}
 }

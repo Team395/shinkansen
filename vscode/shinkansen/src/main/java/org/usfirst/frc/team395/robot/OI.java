@@ -40,24 +40,21 @@ public class OI {
 		return INVERT * xboxController.getY(Hand.kLeft);	
 	}
 	
-	 ElevatorTrigger elevatorTrigger;
-	// Button highScaleHeight = new JoystickButton(xboxController, 4);
-	// Button normalScaleHeight = new JoystickButton(xboxController, 2);
-	// Button lowScaleHeight = new JoystickButton(xboxController, 1);
-	// Button switchHeight = new JoystickButton(xboxController, 3);
-	// Button bottomHeight = new JoystickButton(xboxController, 9);
-	
-	OI() {
-	}
+	public ElevatorTrigger elevatorTrigger;
+	Button highScaleHeight = new JoystickButton(xboxController, 4);
+	Button normalScaleHeight = new JoystickButton(xboxController, 2);
+	Button lowScaleHeight = new JoystickButton(xboxController, 1);
+	Button switchHeight = new JoystickButton(xboxController, 3);
+	Button bottomHeight = new JoystickButton(xboxController, 9);
 	
 	public void setUpTriggers() {
 		elevatorTrigger = new ElevatorTrigger();
-		elevatorTrigger.whileActive(new ElevatorJoystick());
-	// 	highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
-	// 	normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
-	// 	lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
-	// 	switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
-	// 	bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
+		elevatorTrigger.whenActive(new ElevatorJoystick());
+		highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
+		normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
+		lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
+		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
+		bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
 	}
 	
 	

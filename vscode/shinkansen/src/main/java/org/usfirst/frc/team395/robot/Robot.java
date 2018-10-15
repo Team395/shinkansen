@@ -47,7 +47,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi.setUpTriggers();
-		elevator.initializeSystem();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// // chooser.addObject("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", chooser);
@@ -60,8 +59,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		//TODO: Remove
-		elevator.initializeSystem();
+
 	}
 
 	@Override
@@ -84,7 +82,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
 		//autonomousCommand = new Drive10Turn90Drive5();
-
+		elevator.initializeSystem();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -96,6 +94,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
+		elevator.initializeSystem();
 	}
 
 	/**
@@ -104,6 +103,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("Elevator Enabled", elevator.getPIDController().isEnabled());
+
 	}
 
 	@Override
@@ -112,6 +113,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		elevator.initializeSystem();
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
@@ -120,11 +122,13 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is called periodically during operator control.
 	 */
+	double setpointInches = 0;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("Elevator Trigger", oi.elevatorTrigger.get());
+		SmartDashboard.putString("Elevator Command", elevator.getCurrentCommandName());
 	}
-
 	/**
 	 * This function is called periodically during test mode.
 	 */

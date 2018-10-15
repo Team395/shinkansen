@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -18,22 +19,22 @@ public class Elevator extends PIDSubsystem {
 	DigitalInput bottomLimit = new DigitalInput(RobotMap.Elevator.bottomLimitSwitch);
 	// System constants (initial values)
 	double percentOffset = 0.19;
-	double minimumOutput = 0;
-	final double topPositionUnits = 20000;
-	final double bottomPositionUnits = 0;
-	final double topPositionInches = 100.0;
-	final double bottomPositionInches = 0.0;
-	final double UNITS_PER_ROTATION = 4096;
-	final double CASCADE_FACTOR = 2; //TODO: Tune
-	final double DRUM_DIAMETER = 2; //TODO: Test
+	double minimumOutput = -0.19;
+	final static double topPositionInches = 80.0;
+	final static double bottomPositionInches = 0.0;
+	final static double topPositionUnits = convertInchesToUnits(topPositionInches);
+	final static double bottomPositionUnits = convertInchesToUnits(bottomPositionInches);
+	final static double UNITS_PER_ROTATION = 4096;
+	final static double CASCADE_FACTOR = 1.8; //TODO: Tune
+	final static double DRUM_DIAMETER = 2.41; 
 	
 	public Elevator() {
-    	super(0.1, 0, 0.02);
-    	
+    	super(0.00025, 0.0, 0.00015);
+		
     	//Minimum and maximum percent outputs
 		setOutputRange(minimumOutput, 1);
 		setInputRange(bottomPositionUnits, topPositionUnits);
-    	
+		setAbsoluteTolerance(convertInchesToUnits(2));
         // Use these to get going:
         // setSetpoint() -  Sets where the PID controller should move the system
         //                  to
@@ -41,7 +42,7 @@ public class Elevator extends PIDSubsystem {
 	}
 	
 	public void initializeSystem() {
-		homeEncoder();
+		// homeEncoder();
 		enable();
 	}
 
@@ -65,9 +66,12 @@ public class Elevator extends PIDSubsystem {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
 		// e.g. yourMotor.set(output);
-		System.out.println("usePIDOutput: " + output + "\tpercentOffset: " + percentOffset + "\tbottomLimitPressed: "
-			+ bottomLimitPressed() + "\tgetSetpoint: " + getSetpoint()
-			+ "\tcurrentPosition: " + getElevatorEncoder());
+		SmartDashboard.putNumber("PID Output", output);
+		SmartDashboard.putNumber("Current Position", convertUnitsToInches(getElevatorEncoder()));
+		SmartDashboard.putNumber("Current Setpoint", convertUnitsToInches(getSetpoint()));
+		//System.out.println("usePIDOutput: " + output + "\tpercentOffset: " + percentOffset + "\tbottomLimitPressed: "
+		//	+ bottomLimitPressed() + "\tgetSetpoint: " + getSetpoint()
+		//	+ "\tcurrentPosition: " + getElevatorEncoder());
 
 		output += percentOffset;
 		
@@ -112,18 +116,17 @@ public class Elevator extends PIDSubsystem {
     }
     
     public void setElevatorSetpoint(double setpointInches) {
-		System.out.println("setpointInches: " + setpointInches + "\t currentPosition: " + getElevatorEncoder());
     	double setpointUnits = convertInchesToUnits(setpointInches);
     	setSetpoint(setpointUnits);
 	}
 	
-	public double convertUnitsToInches(double units) {
+	public static double convertUnitsToInches(double units) {
 		double inches = units * CASCADE_FACTOR * Math.PI * DRUM_DIAMETER / UNITS_PER_ROTATION;
 
 		return inches;
 	}
 
-	public double convertInchesToUnits(double inches) {
+	public static double convertInchesToUnits(double inches) {
 		double units = inches * UNITS_PER_ROTATION / CASCADE_FACTOR / Math.PI / DRUM_DIAMETER;
 
 		return units;
