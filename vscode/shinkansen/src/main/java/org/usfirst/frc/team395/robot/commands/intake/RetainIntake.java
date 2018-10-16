@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RetainIntake extends Command {
-    private static final double RETAIN_PERIOD_LENGTH = 1;
-    private static final double RETAIN_DUTY_CYCLE = 0.25;
+    private static final double RETAIN_PERIOD_LENGTH = 4;
+    private static final double RETAIN_DUTY_CYCLE = 0.5;
     private Timer timer = new Timer();
 
     public RetainIntake() {
@@ -41,7 +41,7 @@ public class RetainIntake extends Command {
 
         //If the timer is in the first RETAIN_DUTY_CYCLE fraction of one period, retain the cube
         if(timer.get() < RETAIN_PERIOD_LENGTH * RETAIN_DUTY_CYCLE) {
-            Robot.intake.setIntakeSpeed(-1);
+            Robot.intake.setIntakeSpeed(-0.5);
         } else {
             Robot.intake.setIntakeSpeed(0);
         }
@@ -63,7 +63,7 @@ public class RetainIntake extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.intake.isCubeInIntake();
+        return !Robot.intake.isCubeInIntake();
     }
     
     // Called once after isFinished returns true

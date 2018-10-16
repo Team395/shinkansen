@@ -24,6 +24,9 @@ public class Intake extends Subsystem {
     Solenoid closeSolenoid = new Solenoid(RobotMap.Intake.closeSolenoid);
     DigitalInput cubeDetectedSensor = new DigitalInput(RobotMap.Intake.cubeDetectedSensor);
     
+    public Intake() {
+        rightIntake.setInverted(true);
+    }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

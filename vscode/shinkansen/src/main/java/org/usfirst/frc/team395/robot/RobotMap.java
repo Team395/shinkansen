@@ -35,9 +35,9 @@ public abstract class RobotMap {
 	}
 	
 	public static class Sensors {
-		public static int leftEncoderTalon = 0;
-		public static int rightEncoderTalon = 0;
-		public static int gyroTalon = 0;
+		public static int leftEncoderTalon = 2;
+		public static int rightEncoderTalon = 3;
+		public static int gyroTalon = 5;
 		public static int winchEncoderTalon = 1;
 	}
 	
@@ -48,9 +48,9 @@ public abstract class RobotMap {
 
 	public static class Intake {
 		public static int leftIntake = 0;
-		public static int rightIntake = 0;
+		public static int rightIntake = 1;
 		public static int openSolenoid = 0;
-		public static int closeSolenoid = 0;
-		public static int cubeDetectedSensor = 0;
+		public static int closeSolenoid = 1;
+		public static int cubeDetectedSensor = 9;
 	}
 }

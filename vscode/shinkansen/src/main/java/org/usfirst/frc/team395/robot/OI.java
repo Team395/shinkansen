@@ -57,10 +57,10 @@ public class OI {
         //Intake Triggers
         manualTrigger.whileActive(new ManualIntake());
         autoscoreButton.whenPressed(new AutoscoreIntake());
-        retainTrigger.whenActive(new RetainIntake());
-        automaticTrigger.whenActive(new AutomaticIntake());
+        retainTrigger.whileActive(new RetainIntake());
+        automaticTrigger.whileActive(new AutomaticIntake());
         thresholdTrigger.whenActive(new AutomaticIntake());
-        toggleManual.whenPressed(new ToggleIntakeCommand());
+		toggleManual.whenPressed(new ToggleIntakeCommand());
     }
 	
 	public double getLeftY() {
@@ -74,7 +74,7 @@ public class OI {
 	public double getElevatorThrottle() {
 		return INVERT * xboxController.getY(Hand.kLeft);	
 	}
-	
+
     public boolean getCloseIntake() {
         return xboxController.getBumper(Hand.kLeft);
     }

@@ -88,7 +88,6 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
 		//autonomousCommand = new Drive10Turn90Drive5();
-		elevator.initializeSystem();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -109,8 +108,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putBoolean("Elevator Enabled", elevator.getPIDController().isEnabled());
-
 	}
 
 	@Override
@@ -134,6 +131,13 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putBoolean("Elevator Trigger", oi.elevatorTrigger.get());
 		SmartDashboard.putString("Elevator Command", elevator.getCurrentCommandName());
+		SmartDashboard.putString("Intake Command", intake.getCurrentCommandName());
+		SmartDashboard.putBoolean("Cube In Intake", intake.isCubeInIntake());
+		System.out.println("Manual Trigger " + (oi.manualTrigger.get() ? "true" : "false"));
+		System.out.println("Automatic Trigger " + (oi.automaticTrigger.get() ? "true" : "false"));
+		System.out.println("Retain Trigger " + (oi.retainTrigger.get() ? "true" : "false"));
+		System.out.println("Threshold Trigger " + (oi.thresholdTrigger.get() ? "true\n" : "false\n"));
+
 	}
 	/**
 	 * This function is called periodically during test mode.
