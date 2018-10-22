@@ -16,6 +16,6 @@ import org.usfirst.frc.team395.robot.Robot;
 public class RetainTrigger extends Trigger {
     @Override
     public boolean get() {
-        return Robot.intake.isCubeInIntake() && Robot.intake.getCurrentCommand() == null;
+        return Robot.intake.isCubeInIntake() && Robot.intake.getCurrentCommand() == null && !Robot.intake.isIntakeOpen();
     }
 }

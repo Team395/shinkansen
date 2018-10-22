@@ -46,7 +46,6 @@ public class Intake extends Subsystem {
     }
 
     public boolean isIntakeOpen() {
-        //TODO: Trustworthy enough? Maybe both/neither are pressurized?
         return openSolenoid.get();
     }
 

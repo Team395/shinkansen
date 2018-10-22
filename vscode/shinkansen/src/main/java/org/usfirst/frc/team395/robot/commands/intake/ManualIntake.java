@@ -14,6 +14,8 @@ public class ManualIntake extends Command {
     public ManualIntake() {
         super("ManualIntake");
         requires(Robot.intake);
+
+        setInterruptible(true);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -38,7 +40,7 @@ public class ManualIntake extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.intake.isCubeInIntake();
+        return Robot.intake.isCubeInIntake() && Robot.intake.isIntakeOpen();
     }
     
     // Called once after isFinished returns true

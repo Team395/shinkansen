@@ -7,15 +7,38 @@
 
 package org.usfirst.frc.team395.robot.commands.intake;
 
-import edu.wpi.first.wpilibj.command.ConditionalCommand;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import org.usfirst.frc.team395.robot.Robot;
 
-public class ToggleIntakeCommand extends ConditionalCommand {
-    public ToggleIntakeCommand() {
-        super(new AutomaticIntake(), new ManualIntake());
-    }
-    
-    protected boolean condition() {
-        return Robot.intake.getCurrentCommand().getName().equals("ManualIntake");
-    }
+public class ToggleIntakeCommand extends Command {
+
+	// Called just before this Command runs the first time
+	public void initialize() {
+		System.out.println("Initialized");
+		if(Robot.intake.getCurrentCommandName().equals("ManualIntake")) {
+			System.out.println("Toggled Auto");
+			Scheduler.getInstance().add(new AutomaticIntake());
+		} else {
+			System.out.println("Toggled Manual");
+			Scheduler.getInstance().add(new ManualIntake());
+		}
+	}
+
+	public void execute() {
+
+	}
+
+	public boolean isFinished() {
+		return true;
+	}
+
+	public void end() {
+
+	}
+
+	public void interrupted() {
+
+	}
+
 }

@@ -38,7 +38,7 @@ public class OI {
 	Button switchHeight = new JoystickButton(xboxController, 3);
 	Button bottomHeight = new JoystickButton(xboxController, 9);
 	
-	Button autoscoreButton = new JoystickButton(xboxController, 9);
+	Button autoscoreButton = new JoystickButton(xboxController, 10);
 	Button toggleManual = new JoystickButton(xboxController, 7);
 	ManualTrigger manualTrigger = new ManualTrigger();
 	RetainTrigger retainTrigger = new RetainTrigger();
@@ -55,10 +55,10 @@ public class OI {
         bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
         
         //Intake Triggers
-        manualTrigger.whileActive(new ManualIntake());
+        manualTrigger.whenActive(new ManualIntake());
         autoscoreButton.whenPressed(new AutoscoreIntake());
-        retainTrigger.whileActive(new RetainIntake());
-        automaticTrigger.whileActive(new AutomaticIntake());
+        retainTrigger.whenActive(new RetainIntake());
+        automaticTrigger.whenActive(new AutomaticIntake());
         thresholdTrigger.whenActive(new AutomaticIntake());
 		toggleManual.whenPressed(new ToggleIntakeCommand());
     }
@@ -76,15 +76,15 @@ public class OI {
 	}
 
     public boolean getCloseIntake() {
-        return xboxController.getBumper(Hand.kLeft);
+        return xboxController.getTriggerAxis(Hand.kLeft) > 0.5;
     }
 
     public boolean getOpenIntake() {
-        return xboxController.getBumper(Hand.kRight);
+        return xboxController.getTriggerAxis(Hand.kRight) > 0.5;
     }
 
     public double getIntakeThrottle() {
-        return xboxController.getY(Hand.kRight);
+        return INVERT * xboxController.getY(Hand.kRight);
     }
 
 	//// CREATING BUTTONS

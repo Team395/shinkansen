@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //TODO: Uncomment
 // import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
 import org.usfirst.frc.team395.robot.commands.*;
+import org.usfirst.frc.team395.robot.commands.intake.*;
 import org.usfirst.frc.team395.robot.subsystems.*;
 
 /**
@@ -53,6 +54,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		compressor.setClosedLoopControl(true);
 		oi.setUpTriggers();
+		Scheduler.getInstance().add((intake.isCubeInIntake() ? new ManualIntake() : new AutomaticIntake()));
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// // chooser.addObject("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", chooser);
@@ -124,7 +126,7 @@ public class Robot extends TimedRobot {
 
 	/**
 	 * This function is called periodically during operator control.
-	 */
+3	 */
 	double setpointInches = 0;
 	@Override
 	public void teleopPeriodic() {
@@ -132,11 +134,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Elevator Trigger", oi.elevatorTrigger.get());
 		SmartDashboard.putString("Elevator Command", elevator.getCurrentCommandName());
 		SmartDashboard.putString("Intake Command", intake.getCurrentCommandName());
+		SmartDashboard.putString("Drivetrain Command", drivetrain.getCurrentCommandName());
 		SmartDashboard.putBoolean("Cube In Intake", intake.isCubeInIntake());
-		System.out.println("Manual Trigger " + (oi.manualTrigger.get() ? "true" : "false"));
-		System.out.println("Automatic Trigger " + (oi.automaticTrigger.get() ? "true" : "false"));
-		System.out.println("Retain Trigger " + (oi.retainTrigger.get() ? "true" : "false"));
-		System.out.println("Threshold Trigger " + (oi.thresholdTrigger.get() ? "true\n" : "false\n"));
+		// System.out.println("Manual Trigger " + (oi.manualTrigger.get() ? "true" : "false"));
+		// System.out.println("Automatic Trigger " + (oi.automaticTrigger.get() ? "true" : "false"));
+		// System.out.println("Retain Trigger " + (oi.retainTrigger.get() ? "true" : "false"));
+		// System.out.println("Threshold Trigger " + (oi.thresholdTrigger.get() ? "true\n" : "false\n"));
 
 	}
 	/**
@@ -146,3 +149,4 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 }
+
