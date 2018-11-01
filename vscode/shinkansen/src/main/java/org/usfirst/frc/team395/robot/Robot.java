@@ -37,8 +37,7 @@ public class Robot extends TimedRobot {
 
 	public static Elevator elevator = new Elevator();
 	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
-	//TODO: Uncomment
-	// public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
+	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
 	
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static OI oi = new OI();
