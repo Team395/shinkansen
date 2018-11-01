@@ -67,6 +67,10 @@ public class OI {
 		return INVERT * leftStick.getY();
 	}
 	
+	public double getLeftX() {
+		return leftStick.getX();
+	}
+	
 	public double getRightY() {
 		return INVERT * rightStick.getY();
 	}

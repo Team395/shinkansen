@@ -8,9 +8,12 @@
 package org.usfirst.frc.team395.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team395.robot.Robot;
 
 public class ArcadeDrive extends Command {
   public ArcadeDrive() {
+    super("ArcadeDrive");
+    requires(Robot.drivetrain);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -23,6 +26,9 @@ public class ArcadeDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double x = Robot.oi.getLeftX();
+    double y = Robot.oi.getLeftY();
+    Robot.drivetrain.tankDrive(y-x, y+x);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -34,11 +40,13 @@ public class ArcadeDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drivetrain.tankDrive(0,0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
