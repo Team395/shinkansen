@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team395.robot.commands;
 
 import org.usfirst.frc.team395.robot.Robot;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TurnDegrees extends Command {
 	
-	PIDController turnPID = new PIDController(0, 0, 0, 0, Robot.drivetrainGyro, Robot.drivetrain);
+	PIDController turnPID = new PIDController(0.04, 0, 0.004, 0, Robot.drivetrainGyro, Robot.drivetrain);
 	double turnDegrees = 0.0;
 	double ACCEPTABLE_ERROR_DEGREES = 1.5;
 
