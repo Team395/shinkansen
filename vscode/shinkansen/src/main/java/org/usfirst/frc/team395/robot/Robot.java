@@ -14,8 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-//TODO: Uncomment
-// import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
+import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
 import org.usfirst.frc.team395.robot.commands.*;
 import org.usfirst.frc.team395.robot.commands.intake.*;
 import org.usfirst.frc.team395.robot.subsystems.*;
