@@ -5,12 +5,8 @@ import org.usfirst.frc.team395.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
-public class DrivetrainEncoders extends Subsystem implements PIDSource {
+public class DrivetrainEncoders implements PIDSource {
 	
 	public enum RobotSide {
 		LEFT,
@@ -26,14 +22,6 @@ public class DrivetrainEncoders extends Subsystem implements PIDSource {
 	private static int WHEEL_DIAMETER_INCHES = 4;
 	private static int UNITS_PER_ROTATION = 4096;
 	
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
-    
     public double getEncoderValue(RobotSide robotSide, ValueType valueType) {
     	switch(valueType) {
 	    	case VELOCITY:
