@@ -26,11 +26,6 @@ public class DrivetrainGyro extends Subsystem implements PIDSource {
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
     
     public double getAngleZ() {
     	double[] returnArray = new double[3];
@@ -60,4 +55,8 @@ public class DrivetrainGyro extends Subsystem implements PIDSource {
 	public double pidGet() {
 		return getAngleZ();
 	}
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
 }
