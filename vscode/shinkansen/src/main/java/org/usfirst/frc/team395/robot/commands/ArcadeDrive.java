@@ -28,7 +28,7 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     double x = Robot.oi.getLeftX();
     double y = Robot.oi.getLeftY();
-    Robot.drivetrain.tankDrive(y-x, y+x);
+    Robot.drivetrain.tankDrive(y+x, y-x);
   }
 
   // Make this return true when this Command no longer needs to run execute()
