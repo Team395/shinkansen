@@ -1,11 +1,16 @@
 package org.usfirst.frc.team395.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsytem;
-import com.ctre.phoneix.motorcontrol.can.WPI_TalonSRX;
-import org.usfirst.frc.team395.robot.Robot;
-import org.usfirst.frc.team395.robot.Robotmap;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-public class Drivetrain extends Subsystem {
+import org.usfirst.frc.team395.robot.RobotMap;
+import org.usfirst.frc.team395.robot.commands.TankDrive;
+
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import org.usfirst.frc.team395.robot.Robot;
+
+public class Drivetrain extends Subsystem implements PIDOutput{
 
     private WPI_TalonSRX leftLeader = Robot.talonMap.getTalonByID(RobotMap.Drive.leftLeaderTalon);
     private WPI_TalonSRX leftFollower = Robot.talonMap.getTalonByID(RobotMap.Drive.leftFollowerTalon);
@@ -15,7 +20,7 @@ public class Drivetrain extends Subsystem {
     private SpeedControllerGroup leftSpeedController = new SpeedControllerGroup (leftLeader, leftFollower);
     private SpeedControllerGroup rightSpeedController = new SpeedControllerGroup(rightLeader, rightFollower);
 
-    public void initDefaultCommmand() {
+    public void initDefaultCommand() {
 
         setDefaultCommand(new TankDrive());
 
@@ -24,8 +29,12 @@ public class Drivetrain extends Subsystem {
     public void tankDrive(double left, double right) {
         
         leftSpeedController.set(left);
-        rightSpeedController.set(right);
+        rightSpeedController.set(right*-1);
         
+    }
+
+    public void pidWrite(double speed) {
+
     }
 }
 

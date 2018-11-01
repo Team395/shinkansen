@@ -140,7 +140,6 @@ public class Robot extends TimedRobot {
 		// System.out.println("Automatic Trigger " + (oi.automaticTrigger.get() ? "true" : "false"));
 		// System.out.println("Retain Trigger " + (oi.retainTrigger.get() ? "true" : "false"));
 		// System.out.println("Threshold Trigger " + (oi.thresholdTrigger.get() ? "true\n" : "false\n"));
-
 	}
 	/**
 	 * This function is called periodically during test mode.
