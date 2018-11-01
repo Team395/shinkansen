@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveFeet extends Command {
-	PIDController linearPID = new PIDController(0, 0, 0, 0, Robot.drivetrainEncoders, Robot.drivetrain);
+	PIDController linearPID = new PIDController(0.03, 0, 0.2, 0, Robot.drivetrainEncoders, Robot.drivetrain);
 	double distanceFeet = 0;
 	private static double ACCEPTABLE_ERROR = Robot.drivetrainEncoders.convertFeetToNativeUnits(1/6);
 	

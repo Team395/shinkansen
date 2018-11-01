@@ -51,7 +51,7 @@ public class Elevator extends PIDSubsystem {
 	final static double topPositionUnits = convertInchesToUnits(topPositionInches);
 	final static double bottomPositionUnits = convertInchesToUnits(bottomPositionInches);
 	final static double UNITS_PER_ROTATION = 4096;
-	final static double CASCADE_FACTOR = 1.8; //TODO: Tune
+	final static double CASCADE_FACTOR = 1.8;
 	final static double DRUM_DIAMETER = 2.41; 
 	final static double INTAKE_THRESHOLD = 15;
 	
@@ -79,7 +79,6 @@ public class Elevator extends PIDSubsystem {
     }
     
     public double getElevatorEncoder() {
-    	//TODO: Do we want to accept a ValueType and return velocity as well?
     	return Robot.talonMap.getTalonByID(RobotMap.Sensors.winchEncoderTalon).getSelectedSensorPosition(0);
     }
     

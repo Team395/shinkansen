@@ -14,8 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-//TODO: Uncomment
-// import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
+import org.usfirst.frc.team395.robot.commandgroups.Drive10Turn90Drive5;
 import org.usfirst.frc.team395.robot.commands.*;
 import org.usfirst.frc.team395.robot.commands.intake.*;
 import org.usfirst.frc.team395.robot.subsystems.*;
@@ -37,8 +36,7 @@ public class Robot extends TimedRobot {
 
 	public static Elevator elevator = new Elevator();
 	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
-	//TODO: Uncomment
-	// public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
+	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
 	
 	public static Drivetrain drivetrain = new Drivetrain();
 	public static OI oi = new OI();
@@ -136,10 +134,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Intake Command", intake.getCurrentCommandName());
 		SmartDashboard.putString("Drivetrain Command", drivetrain.getCurrentCommandName());
 		SmartDashboard.putBoolean("Cube In Intake", intake.isCubeInIntake());
-		// System.out.println("Manual Trigger " + (oi.manualTrigger.get() ? "true" : "false"));
-		// System.out.println("Automatic Trigger " + (oi.automaticTrigger.get() ? "true" : "false"));
-		// System.out.println("Retain Trigger " + (oi.retainTrigger.get() ? "true" : "false"));
-		// System.out.println("Threshold Trigger " + (oi.thresholdTrigger.get() ? "true\n" : "false\n"));
 	}
 	/**
 	 * This function is called periodically during test mode.
