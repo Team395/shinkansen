@@ -2,13 +2,13 @@ package org.usfirst.frc.team395.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import org.usfirst.frc.team395.robot.Robot;
 import org.usfirst.frc.team395.robot.RobotMap;
-import org.usfirst.frc.team395.robot.commands.TankDrive;
+import org.usfirst.frc.team395.robot.commands.ArcadeDrive;
 
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.usfirst.frc.team395.robot.Robot;
 
 public class Drivetrain extends Subsystem implements PIDOutput{
 
@@ -22,7 +22,7 @@ public class Drivetrain extends Subsystem implements PIDOutput{
 
     public void initDefaultCommand() {
 
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new ArcadeDrive());
 
     }
 

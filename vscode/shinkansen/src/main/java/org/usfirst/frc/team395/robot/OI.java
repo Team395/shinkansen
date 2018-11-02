@@ -38,6 +38,9 @@ public class OI {
 	Button switchHeight = new JoystickButton(xboxController, 3);
 	Button bottomHeight = new JoystickButton(xboxController, 9);
 	
+	Button tankDriveButton = new JoystickButton(leftStick, 6);
+	Button arcadeDriveButton = new JoystickButton(leftStick, 7);
+
 	Button autoscoreButton = new JoystickButton(xboxController, 10);
 	Button toggleManual = new JoystickButton(xboxController, 7);
 	ManualTrigger manualTrigger = new ManualTrigger();
@@ -53,7 +56,10 @@ public class OI {
 		lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
 		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
         bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
-        
+		
+		tankDriveButton.whenPressed(new TankDrive());
+		arcadeDriveButton.whenPressed(new ArcadeDrive());
+
         //Intake Triggers
         manualTrigger.whenActive(new ManualIntake());
         autoscoreButton.whenPressed(new AutoscoreIntake());
@@ -62,18 +68,33 @@ public class OI {
         thresholdTrigger.whenActive(new AutomaticIntake());
 		toggleManual.whenPressed(new ToggleIntakeCommand());
     }
-	
+	public static final double deadzone = 0.2;
+
+	private double trim(double value){
+		if(Math.abs(value) < deadzone){
+			return 0;
+		}
+		else {
+			return value;
+		}
+	}
+
 	public double getLeftY() {
-		return INVERT * leftStick.getY();
+		//return INVERT * leftStick.getY();
+		return INVERT * trim(leftStick.getY());
+		 
 	}
 	
 	public double getLeftX() {
-		return leftStick.getX();
+		//return leftStick.getX();
+		return trim(leftStick.getX());
+	}
+
+	public double getRightY() {
+		//return INVERT * rightStick.getY();
+		return INVERT * trim(rightStick.getY());
 	}
 	
-	public double getRightY() {
-		return INVERT * rightStick.getY();
-	}
 	
 	public double getElevatorThrottle() {
 		return INVERT * xboxController.getY(Hand.kLeft);	
