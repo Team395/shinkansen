@@ -1,40 +1,24 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package org.usfirst.frc.team395.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import org.usfirst.frc.team395.robot.Robot;
-import org.usfirst.frc.team395.robot.RobotMap;
-import org.usfirst.frc.team395.robot.commands.ArcadeDrive;
-
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Drivetrain extends Subsystem implements PIDOutput{
+/**
+ * Add your docs here.
+ */
+public class Drivetrain extends Subsystem {
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
 
-    private WPI_TalonSRX leftLeader = Robot.talonMap.getTalonByID(RobotMap.Drive.leftLeaderTalon);
-    private WPI_TalonSRX leftFollower = Robot.talonMap.getTalonByID(RobotMap.Drive.leftFollowerTalon);
-    private WPI_TalonSRX rightLeader = Robot.talonMap.getTalonByID(RobotMap.Drive.rightLeaderTalon);
-    private WPI_TalonSRX rightFollower = Robot.talonMap.getTalonByID(RobotMap.Drive.rightFollowerTalon);
-
-    private SpeedControllerGroup leftSpeedController = new SpeedControllerGroup (leftLeader, leftFollower);
-    private SpeedControllerGroup rightSpeedController = new SpeedControllerGroup(rightLeader, rightFollower);
-
-    public void initDefaultCommand() {
-
-        setDefaultCommand(new ArcadeDrive());
-
-    }
-
-    public void tankDrive(double left, double right) {
-        
-        leftSpeedController.set(left);
-        rightSpeedController.set(right*-1);
-        
-    }
-
-    public void pidWrite(double speed) {
-
-    }
+  @Override
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+  }
 }
-
