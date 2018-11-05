@@ -1,4 +1,4 @@
-package org.usfirst.frc.team395.robot.subsystems;
+package org.usfirst.frc.team395.robot;
 
 import java.util.HashMap;
 import java.util.Map;
