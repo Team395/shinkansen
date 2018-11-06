@@ -39,7 +39,7 @@ public class OI {
 	Button bottomHeight = new JoystickButton(xboxController, 9);
 	
 	Button tankDriveButton = new JoystickButton(leftStick, 6);
-	Button arcadeDriveButton = new JoystickButton(leftStick, 7);
+	// Button arcadeDriveButton = new JoystickButton(leftStick, 7);
 
 	Button autoscoreButton = new JoystickButton(xboxController, 10);
 	Button toggleManual = new JoystickButton(xboxController, 7);
@@ -57,8 +57,8 @@ public class OI {
 		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
         bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
 		
-		tankDriveButton.whenPressed(new TankDrive());
-		arcadeDriveButton.whenPressed(new ArcadeDrive());
+		tankDriveButton.whenPressed(new ToggleDriveTrainMode());
+		// arcadeDriveButton.whenPressed(new ArcadeDrive());
 
         //Intake Triggers
         manualTrigger.whenActive(new ManualIntake());
