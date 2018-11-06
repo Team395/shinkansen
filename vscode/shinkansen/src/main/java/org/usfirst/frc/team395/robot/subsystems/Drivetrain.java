@@ -15,7 +15,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drivetrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  WPI_TalonSRX leftLeader = new WPI_TalonSRX(RobotMap.Drive.leftLeaderTalon);
+  WPI_TalonSRX leftFollower = new WPI_TalonSRX(RobotMap.Drive.leftFollowerTalon);
+  WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.Drive.rightLeaderTalon);
+  WPI_TalonSRX rightFollower = new WPI_TalonSRX(RobotMap.Drive.rightFollowerTalon);
 
+  SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftLeader, leftFollower);
+  SpeedControllerGroup rightGroup =new SpeedControllerGroup(rightLeader, rightFollower);
+
+  public void tankDrive(double left, double right) {
+    leftGroup.set(left);
+    rightGroup.set(right);
+  }
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
