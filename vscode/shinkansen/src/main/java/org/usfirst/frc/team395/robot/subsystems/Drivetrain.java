@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class Drivetrain extends Subsystem {
+public class Drivetrain extends Subsystem implements PIDOutput{
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   WPI_TalonSRX leftLeader = new WPI_TalonSRX(RobotMap.Drive.leftLeaderTalon);
@@ -30,7 +30,15 @@ public class Drivetrain extends Subsystem {
   
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new TankDrive());
+  
+    
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
+  public void pidWrite(double output){
+    tankDrive(output, output);`
+
+  }
+
 }
