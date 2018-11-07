@@ -23,6 +23,9 @@ public class TankDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double left = Robot.oi.getLeftY(); 
+    double right = Robot.oi.getRightY();
+    Robot.drivetrain.tankDrive(left, right);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,5 +43,6 @@ public class TankDrive extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    Robot.drivetrain.tankDrive(0, 0);
   }
 }
