@@ -8,12 +8,9 @@
 package org.usfirst.frc.team395.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team395.robot.Robot;
 
 public class TankDrive extends Command {
   public TankDrive() {
-    super("TankDrive");
-    requires(Robot.drivetrain);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -22,11 +19,10 @@ public class TankDrive extends Command {
   @Override
   protected void initialize() {
   }
- 
+
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.tankDrive(Robot.oi.getLeftY(), Robot.oi.getRightY());
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,13 +34,11 @@ public class TankDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.drivetrain.tankDrive(0,0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
