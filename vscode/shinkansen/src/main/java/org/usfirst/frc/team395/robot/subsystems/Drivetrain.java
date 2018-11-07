@@ -7,6 +7,13 @@
 
 package org.usfirst.frc.team395.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import org.usfirst.frc.team395.robot.RobotMap;
+import org.usfirst.frc.team395.robot.commands.TankDrive;
+
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -14,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drivetrain extends Subsystem implements PIDOutput{
   // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  // here. Call these from Commands.P
   WPI_TalonSRX leftLeader = new WPI_TalonSRX(RobotMap.Drive.leftLeaderTalon);
   WPI_TalonSRX leftFollower = new WPI_TalonSRX(RobotMap.Drive.leftFollowerTalon);
   WPI_TalonSRX rightLeader = new WPI_TalonSRX(RobotMap.Drive.rightLeaderTalon);
@@ -25,7 +32,7 @@ public class Drivetrain extends Subsystem implements PIDOutput{
 
   public void tankDrive(double left, double right) {
     leftGroup.set(left);
-    rightGroup.set(right);
+    rightGroup.set(-right);
   }
   
   @Override
@@ -37,7 +44,7 @@ public class Drivetrain extends Subsystem implements PIDOutput{
     // setDefaultCommand(new MySpecialCommand());
   }
   public void pidWrite(double output){
-    tankDrive(output, output);`
+    tankDrive(output, output);
 
   }
 
