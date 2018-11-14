@@ -25,7 +25,7 @@ public class Intake extends Subsystem {
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-
+  
   public void IntakeOpen() {
     onSolenoid.set(true);
     offSolenoid.set(false);
