@@ -41,6 +41,9 @@ public class OI {
 	Button tankDriveButton = new JoystickButton(leftStick, 6);
 	Button arcadeDriveButton = new JoystickButton(leftStick, 7);
 
+	Button turnDegreesButton = new JoystickButton(leftStick, 8);
+
+
 	Button autoscoreButton = new JoystickButton(xboxController, 10);
 	Button toggleManual = new JoystickButton(xboxController, 7);
 	ManualTrigger manualTrigger = new ManualTrigger();
@@ -60,6 +63,7 @@ public class OI {
 		tankDriveButton.whenPressed(new TankDrive());
 		arcadeDriveButton.whenPressed(new ArcadeDrive());
 
+		turnDegreesButton.whenPressed(new TurnDegrees(90));
         //Intake Triggers
         manualTrigger.whenActive(new ManualIntake());
         autoscoreButton.whenPressed(new AutoscoreIntake());
