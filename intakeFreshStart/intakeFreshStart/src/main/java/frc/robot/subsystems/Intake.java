@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.ManualIntake;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
@@ -25,13 +26,22 @@ public class Intake extends Subsystem {
 
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
-  
+  public Intake() {
+    rightIntake.setInverted(true);
+  }
+
   public void IntakeOpen() {
     onSolenoid.set(true);
     offSolenoid.set(false);
 
   }
 
+  public void setWheelSpeed(double speed) {
+    leftIntake.set(speed);
+    rightIntake.set(speed);
+
+  }
+  
   public void IntakeClose() {
     onSolenoid.set(false);
     offSolenoid.set(true);
@@ -48,8 +58,13 @@ public class Intake extends Subsystem {
 
   }
 
+  public boolean cubeInIntake() {
+    return cubeDetector.get();
+  }
+
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new ManualIntake());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

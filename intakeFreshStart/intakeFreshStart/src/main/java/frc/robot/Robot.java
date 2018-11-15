@@ -8,12 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,8 +25,9 @@ import frc.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
-  public static OI m_oi;
-
+  public static OI oi;
+  public static Intake intake = new Intake();
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -35,7 +37,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
+    oi = new OI();
     m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -112,15 +114,40 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    //timer.start();
   }
 
   /**
    * This function is called periodically during operator control.
    */
+  //Timer timer = new Timer();
+  //timer.hasPeriodPassed(double seconds);
+
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    // if(timer.get() > 0 && timer.get() < 1) {
+    //   intake.IntakeOpen();
+    // }
+
+    // if(timer.get() > 1 && timer.get() <2) {
+    //   intake.IntakeClose();
+    // }
+
+    // if(timer.get() > 2 && timer.get() < 3) {
+    //   intake.setWheelSpeed(1);
+    // }
+    
+    // if(timer.get() > 3 && timer.get() < 4) {
+    //   intake.setWheelSpeed(-1);
+    //   }
+    // if(timer.get() > 4) {
+    //   intake.setWheelSpeed(0);
+    //   System.out.println(intake.cubeInIntake() ? "There is a cube in the intake." : "There is not a cube in the intake.");
+    // }
+
   }
+
 
   /**
    * This function is called periodically during test mode.
