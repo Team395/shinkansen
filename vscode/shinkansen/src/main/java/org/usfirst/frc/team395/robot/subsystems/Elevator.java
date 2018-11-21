@@ -3,6 +3,8 @@ package org.usfirst.frc.team395.robot.subsystems;
 import org.usfirst.frc.team395.robot.Robot;
 import org.usfirst.frc.team395.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -31,6 +33,17 @@ public class Elevator extends PIDSubsystem {
 	
 	public Elevator() {
     	super(0.00025, 0.0, 0.00015);
+		
+		//Configures a remote feedback filter to see the winch controller talon
+		winchController.configRemoteFeedbackFilter(RobotMap.Sensors.winchEncoderTalon,
+												   RemoteSensorSource.TalonSRX_SelectedSensor,
+												   0,
+												   10);
+		//Turns of remote filter 1
+		winchController.configRemoteFeedbackFilter(0, RemoteSensorSource.Off, 1, 10);
+
+		//Configure remote sensor
+		winchController.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0, 0, 10);
 		
     	//Minimum and maximum percent outputs
 		setOutputRange(minimumOutput, 1);
