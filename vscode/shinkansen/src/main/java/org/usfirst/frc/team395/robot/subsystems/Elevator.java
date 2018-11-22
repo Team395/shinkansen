@@ -4,6 +4,7 @@ import org.usfirst.frc.team395.robot.Robot;
 import org.usfirst.frc.team395.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.RemoteFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.RemoteSensorSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -22,7 +23,7 @@ public class Elevator extends PIDSubsystem {
 	// System constants (initial values)
 	double percentOffset = 0.19;
 	double minimumOutput = -0.19;
-	final static double topPositionInches = 80.0;
+	final static double topPositionInches = 80;
 	final static double bottomPositionInches = 0.0;
 	final static double topPositionUnits = convertInchesToUnits(topPositionInches);
 	final static double bottomPositionUnits = convertInchesToUnits(bottomPositionInches);
@@ -34,18 +35,7 @@ public class Elevator extends PIDSubsystem {
 	public Elevator() {
     	super(0.00025, 0.0, 0.00015);
 		
-		//Configures a remote feedback filter to see the winch controller talon
-		winchController.configRemoteFeedbackFilter(RobotMap.Sensors.winchEncoderTalon,
-												   RemoteSensorSource.TalonSRX_SelectedSensor,
-												   0,
-												   10);
-		//Turns of remote filter 1
-		winchController.configRemoteFeedbackFilter(0, RemoteSensorSource.Off, 1, 10);
-
-		//Configure remote sensor
-		winchController.configSelectedFeedbackSensor(FeedbackDevice.RemoteSensor0, 0, 10);
-		
-    	//Minimum and maximum percent outputs
+		//Minimum and maximum percent outputs
 		setOutputRange(minimumOutput, 1);
 		setInputRange(bottomPositionUnits, topPositionUnits);
 		setAbsoluteTolerance(convertInchesToUnits(2));
@@ -66,7 +56,7 @@ public class Elevator extends PIDSubsystem {
     }
     
     public double getElevatorEncoder() {
-    	return Robot.talonMap.getTalonByID(RobotMap.Sensors.winchEncoderTalon).getSelectedSensorPosition(0);
+    	return winchController.getSelectedSensorPosition(0);
     }
     
     protected double returnPIDInput() {
