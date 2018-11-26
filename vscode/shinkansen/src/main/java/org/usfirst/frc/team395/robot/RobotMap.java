@@ -35,10 +35,10 @@ public abstract class RobotMap {
 	}
 	
 	public static class Sensors {
-		public static int leftEncoderTalon = 2;
+		public static int leftEncoderTalon = 1;
 		public static int rightEncoderTalon = 3;
 		public static int gyroTalon = 5;
-		public static int winchEncoderTalon = 1;
+		public static int winchEncoderTalon = 2;
 	}
 	
 	public static class Elevator {
