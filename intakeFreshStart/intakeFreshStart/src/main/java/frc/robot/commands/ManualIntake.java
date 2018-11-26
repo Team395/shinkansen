@@ -25,7 +25,7 @@ public class ManualIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.oi.getClawClosed()){
+    if(Robot.oi.getClawClosed()){ 
       Robot.intake.IntakeClose();
 
     }
