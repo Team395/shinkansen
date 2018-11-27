@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.ManualIntake;
+import frc.robot.commands.Intake.AutomaticIntake;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
@@ -64,7 +65,7 @@ public class Intake extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ManualIntake());
+    setDefaultCommand(new AutomaticIntake());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }

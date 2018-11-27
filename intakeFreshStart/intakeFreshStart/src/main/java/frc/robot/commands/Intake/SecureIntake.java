@@ -27,31 +27,32 @@ public class SecureIntake extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    timer.reset();
+    timer.start();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Scheduler.getInstance().run();
-    if(timer.get() > 2 && timer.get() < 4) {
-        // Check for one second t
-            Robot.intake.IntakeClose();
+   Robot.intake.IntakeClose();
 
+   Robot.intake.setWheelSpeed(-1);
 
-            
-         }
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return timer.hasPeriodPassed(1) || !Robot.intake.cubeInIntake();  
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    if(!Robot.intake.cubeInIntake()) {
+      Scheduler.getInstance().add(new AutomaticIntake());
+    }
+
   }
 
   // Called when another command which requires one or more of the same

@@ -9,6 +9,7 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
 /**
@@ -28,7 +29,6 @@ public class GraspIntake extends Command {
   protected void initialize() {
     timer.reset();
     timer.start();
-    Robot.intake.IntakeClose();
     //make sure to state if cubInIntake is true or false
     }
   
@@ -36,22 +36,22 @@ public class GraspIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {    
-      if(timer.get() > 0 && timer.get() < 2) {
-        Robot.intake.setWheelSpeed(-1);
-    }
+    Robot.intake.setWheelSpeed(-1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return timer.hasPeriodPassed(0.5) || !Robot.intake.cubeInIntake();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-
-
+    if(!Robot.intake.cubeInIntake()) {
+      Scheduler.getInstance().add(new AutomaticIntake());
+    }
+    Robot.intake.IntakeClose();
   }
 
   // Called when another command which requires one or more of the same
