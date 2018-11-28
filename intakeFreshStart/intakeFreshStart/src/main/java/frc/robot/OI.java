@@ -7,16 +7,25 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder.BooleanConsumer;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ManualIntake;
+import frc.robot.commands.Intake.AutomaticIntake;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
- XboxController xboxController = new XboxController(2);  //// CREATING BUTTONS
+  XboxController xboxController = new XboxController(2);
+  XboxController backButtoController = new XboxController(3); // Check NUmebr on THe THING!
+  // Joystick leftJoy = new Joystick(1);
+  // Button button1 = new JoystickButton(leftJoy, 1), // ask Henry if this is ok? also named button 1, 4 Bonji to name
+  //        button2 = new JoystickButton(leftJoy, 2);
+ //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
   // You create one by telling it which joystick it's on and which button
@@ -43,7 +52,20 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
-  public boolean getClawOpen(){
+
+  public boolean getBackButton() {
+    return xboxController.getBackButton(Hand.backButtoController); //reasearch what its called.
+
+
+  }
+
+  // public OI() { // something defo wrong with this line 
+  //   button1.whenPressed(new ManualIntake());
+  //   button2.whenPressed(new AutomaticIntake());
+
+  // }
+
+public boolean getClawOpen(){
     return xboxController.getTriggerAxis(Hand.kRight) > .5;
 
   }
