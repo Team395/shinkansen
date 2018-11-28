@@ -8,12 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ManualIntake;
-import frc.robot.commands.Intake.AutomaticIntake;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,7 +16,7 @@ import frc.robot.commands.Intake.AutomaticIntake;
  */
 public class OI {
   XboxController xboxController = new XboxController(2);
-  XboxController backButtoController = new XboxController(3); // Check NUmebr on THe THING!
+  XboxController backButtoController = new XboxController(7); // Check NUmebr on THe THING!
   // Joystick leftJoy = new Joystick(1);
   // Button button1 = new JoystickButton(leftJoy, 1), // ask Henry if this is ok? also named button 1, 4 Bonji to name
   //        button2 = new JoystickButton(leftJoy, 2);
@@ -54,7 +49,8 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   public boolean getBackButton() {
-    return xboxController.getBackButton(Hand.backButtoController); //reasearch what its called.
+    return xboxController.getBackButton(); 
+    
 
 
   }

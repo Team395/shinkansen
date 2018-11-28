@@ -7,8 +7,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
+import frc.robot.commands.Intake.AutomaticIntake;
 
 /**
  * An example command.  You can replace me with your own command.
@@ -16,18 +19,26 @@ import frc.robot.Robot;
 public class ToggleIntake extends Command {
   public ToggleIntake() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_subsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+      if (Robot.intake.getCurrentCommandName().equals("AutomaticIntake")) {
+          Scheduler.getInstance().add(new ManualIntake());
+      }
+      else {
+          Scheduler.getInstance().add(new AutomaticIntake());
+      }
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  }
+
+        
+
+    }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
