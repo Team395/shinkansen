@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -16,7 +19,7 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
   XboxController xboxController = new XboxController(2);
-  XboxController backButtoController = new XboxController(7); // Check NUmebr on THe THING!
+  Button backButton = new JoystickButton(xboxController, 7); // Check NUmebr on THe THING!
   // Joystick leftJoy = new Joystick(1);
   // Button button1 = new JoystickButton(leftJoy, 1), // ask Henry if this is ok? also named button 1, 4 Bonji to name
   //        button2 = new JoystickButton(leftJoy, 2);
@@ -48,18 +51,11 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  public boolean getBackButton() {
-    return xboxController.getBackButton(); 
-    
 
+  public OI() { // something defo wrong with this line 
+    backButton.whenPressed(new ToggleIntake());
 
   }
-
-  // public OI() { // something defo wrong with this line 
-  //   button1.whenPressed(new ManualIntake());
-  //   button2.whenPressed(new AutomaticIntake());
-
-  // }
 
 public boolean getClawOpen(){
     return xboxController.getTriggerAxis(Hand.kRight) > .5;
