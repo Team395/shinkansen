@@ -41,7 +41,7 @@ public class OI {
 	Button autoscoreButton = new JoystickButton(xboxController, 10);
 	Button toggleManual = new JoystickButton(xboxController, 7);
 	ManualTrigger manualTrigger = new ManualTrigger();
-	RetainTrigger retainTrigger = new RetainTrigger();
+	//RetainTrigger retainTrigger = new RetainTrigger();
 	AutomaticTrigger automaticTrigger = new AutomaticTrigger();
 	ThresholdTrigger thresholdTrigger = new ThresholdTrigger();
 	
@@ -57,7 +57,7 @@ public class OI {
         //Intake Triggers
         manualTrigger.whenActive(new ManualIntake());
         autoscoreButton.whenPressed(new AutoscoreIntake());
-        retainTrigger.whenActive(new RetainIntake());
+        //retainTrigger.whenActive(new RetainIntake());
         automaticTrigger.whenActive(new AutomaticIntake());
         thresholdTrigger.whenActive(new AutomaticIntake());
 		toggleManual.whenPressed(new ToggleIntakeCommand());
