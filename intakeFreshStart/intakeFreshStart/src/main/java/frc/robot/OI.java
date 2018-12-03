@@ -8,10 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ManualIntake;
+import frc.robot.commands.ToggleIntake;
+import frc.robot.commands.Intake.AutomaticIntake;
+import frc.robot.commands.Triggers.AutomaticTrigger;
+import frc.robot.commands.Triggers.ManualTrigger;
+import frc.robot.commands.Triggers.ThresholdTrigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,7 +24,12 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public class OI {
   XboxController xboxController = new XboxController(2);
-  Button backButton = new JoystickButton(xboxController, 7); // Check NUmebr on THe THING!
+  Button backButton = new JoystickButton(xboxController, 7); // Check NUmebr on THe THING!  
+  
+  
+  AutomaticTrigger automaticTrigger = new AutomaticTrigger();
+  ManualTrigger manualTrigger = new ManualTrigger();
+  ThresholdTrigger thresholdTrigger = new ThresholdTrigger();
   // Joystick leftJoy = new Joystick(1);
   // Button button1 = new JoystickButton(leftJoy, 1), // ask Henry if this is ok? also named button 1, 4 Bonji to name
   //        button2 = new JoystickButton(leftJoy, 2);
@@ -30,7 +40,9 @@ public class OI {
   // number it is.
   // Joystick stick = new Joystick(port);
   // Button button = new JoystickButton(stick, buttonNumber);
-
+  
+    
+  
   // There are a few additional built in buttons you can use. Additionally,
   // by subclassing Button you can create custom triggers and bind those to
   // commands the same as any other Button.
@@ -50,7 +62,11 @@ public class OI {
   // Start the command when the button is released and let it run the command
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
+  public void setUpTriggers() {
+    manualTrigger.whenActive(new ManualIntake());
+    automaticTrigger.whenActive(new AutomaticIntake());
 
+  }
 
   public OI() { // something defo wrong with this line 
     backButton.whenPressed(new ToggleIntake());
