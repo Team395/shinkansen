@@ -16,8 +16,8 @@ import org.usfirst.frc.team395.robot.Robot;
 public class ManualTrigger extends Trigger {
     @Override
     public boolean get() {
-        return Robot.intake.getCurrentCommand() == null &&
-               (Robot.elevator.isElevatorAboveIntakeThreshold() && !Robot.intake.isCubeInIntake()) ||
-               (!Robot.intake.isIntakeOpen() && Robot.intake.isCubeInIntake());
+        return Robot.intake.getCurrentCommand() == null && 
+               ((Robot.elevator.isElevatorAboveIntakeThreshold() && !Robot.intake.isCubeInIntake()) ||
+               (!Robot.intake.isIntakeOpen() && Robot.intake.isCubeInIntake()));
     }
 }
