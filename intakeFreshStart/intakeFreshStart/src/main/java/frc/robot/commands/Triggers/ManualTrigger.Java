@@ -1,7 +1,7 @@
-package org.usfirst.frc.team395.robot.triggers;
+package frc.robot.commands.Triggers;
 
-import edu.wpi.first.wpilibj.buttons.Tiggers;
-import org.usfirst.frc.team395.robot.Robot;
+import edu.wpi.first.wpilibj.buttons.Trigger;
+import frc.robot.Robot;
 
 /**
  * Add your docs here
@@ -9,7 +9,7 @@ import org.usfirst.frc.team395.robot.Robot;
 public class ManualTrigger extends Trigger {
     @Override
     public boolean get() {
-        return Robot.elavator.isElavatorAboveIntakeThreshold() && Robot.intake.getCurrentCommand() == null && !Robot.intake.cubeInIntake();
+        return Robot.elevator.isElevatorAboveIntakeThreshold() && Robot.intake.getCurrentCommand() == null && !Robot.intake.cubeInIntake();
     }
 
 

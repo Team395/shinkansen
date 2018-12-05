@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot.subsystems; 
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
@@ -17,6 +17,7 @@ import frc.robot.commands.Intake.AutomaticIntake;
 import frc.robot.commands.Triggers.AutomaticTrigger;
 import frc.robot.commands.Triggers.ManualTrigger;
 import frc.robot.commands.Triggers.ThresholdTrigger;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
