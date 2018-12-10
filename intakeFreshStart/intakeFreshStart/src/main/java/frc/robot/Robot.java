@@ -42,6 +42,7 @@ public class Robot extends TimedRobot {
     m_chooser.addDefault("Default Auto", new ExampleCommand());
     // chooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    oi.setUpTriggers();
   }
 
   /**
@@ -127,26 +128,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    // if(timer.get() > 0 && timer.get() < 1) {
-    //   intake.IntakeOpen();
-    // }
-
-    // if(timer.get() > 1 && timer.get() <2) {
-    //   intake.IntakeClose();
-    // }
-
-    // if(timer.get() > 2 && timer.get() < 3) {
-    //   intake.setWheelSpeed(1);
-    // }
-    
-    // if(timer.get() > 3 && timer.get() < 4) {
-    //   intake.setWheelSpeed(-1);
-    //   }
-    // if(timer.get() > 4) {
-    //   intake.setWheelSpeed(0);
-    //   System.out.println(intake.cubeInIntake() ? "There is a cube in the intake." : "There is not a cube in the intake.");
-    // }
-
+    SmartDashboard.putString("Current command", intake.getCurrentCommandName());
+    SmartDashboard.putBoolean("Manual Trigger", oi.manualTrigger.get());
+    SmartDashboard.putBoolean("Automatic Trigger", oi.automaticTrigger.get());
   }
 
 

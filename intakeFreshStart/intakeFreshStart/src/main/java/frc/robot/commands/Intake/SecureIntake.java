@@ -14,12 +14,15 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * Reset then start the timer, then close the claw and spin wheels inward.
+ *  Then if cube is not in intake then reset automatic intake again or if
+ *  after 1 second the cube is still in the claw then switch to manual.
  */
 public class SecureIntake extends Command {
   private Timer timer = new Timer();
   
   public SecureIntake() {
+    super("SecureIntake");
     // Use requires() here to declare subsystem dependencies
     requires(Robot.intake);
   }
@@ -52,7 +55,7 @@ public class SecureIntake extends Command {
     if(!Robot.intake.cubeInIntake()) {
       Scheduler.getInstance().add(new AutomaticIntake());
     }
-
+    Robot.intake.setWheelSpeed(0);
   }
 
   // Called when another command which requires one or more of the same

@@ -11,10 +11,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /**
- * An example command.  You can replace me with your own command.
+ * When there is no cube in the claw, Robot opens the claw 
+ * but the robot is still in control by driver, once the 
+ * cube is sensed then grasp intake starts.
  */
 public class DecideIntake extends Command {
   public DecideIntake() {
+    super("DecideIntake");
     // Use requires() here to declare subsystem dependencies
     requires(Robot.intake);
     
@@ -33,7 +36,6 @@ public class DecideIntake extends Command {
   @Override
   protected void execute() {
     Robot.intake.setWheelSpeed(Robot.oi.getClawSpeed());
-    Robot.intake.cubeInIntake();
     Robot.intake.IntakeOpen();
     
   }

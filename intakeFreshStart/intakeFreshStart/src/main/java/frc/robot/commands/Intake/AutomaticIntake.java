@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutomaticIntake extends CommandGroup {
   /**
-   * Add your docs here.
+   * Automatically grabs a cube, through three other commands, 
+   * If in grasp intake 
+   * or secure intake if the cube is not in intake then the  command will begin from the top.
    */
   public AutomaticIntake() {
+    super("AutomaticIntake");
     addSequential(new DecideIntake());
     addSequential(new GraspIntake());
     addSequential(new SecureIntake());

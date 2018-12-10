@@ -11,12 +11,9 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ManualIntake;
-import frc.robot.commands.ToggleIntake;
-import frc.robot.commands.Intake.AutomaticIntake;
-import frc.robot.commands.Triggers.AutomaticTrigger;
-import frc.robot.commands.Triggers.ManualTrigger;
-import frc.robot.commands.Triggers.ThresholdTrigger;
+import frc.robot.commands.*;
+import frc.robot.commands.Intake.*;
+import frc.robot.Triggers.*;
 
 
 /**
@@ -26,10 +23,11 @@ import frc.robot.commands.Triggers.ThresholdTrigger;
 public class OI {
   XboxController xboxController = new XboxController(2);
   Button backButton = new JoystickButton(xboxController, 7); // Check NUmebr on THe THING!  
+  Button starButton = new JoystickButton(xboxController, 8);
   
   
-  AutomaticTrigger automaticTrigger = new AutomaticTrigger();
-  ManualTrigger manualTrigger = new ManualTrigger();
+  public AutomaticTrigger automaticTrigger = new AutomaticTrigger();
+  public ManualTrigger manualTrigger = new ManualTrigger();
   ThresholdTrigger thresholdTrigger = new ThresholdTrigger();
   // Joystick leftJoy = new Joystick(1);
   // Button button1 = new JoystickButton(leftJoy, 1), // ask Henry if this is ok? also named button 1, 4 Bonji to name
@@ -66,11 +64,11 @@ public class OI {
   public void setUpTriggers() {
     manualTrigger.whenActive(new ManualIntake());
     automaticTrigger.whenActive(new AutomaticIntake());
-
   }
 
   public OI() { // something defo wrong with this line 
     backButton.whenPressed(new ToggleIntake());
+    starButton.whenPressed(new AutoScore());
 
   }
 
@@ -87,5 +85,6 @@ public boolean getClawOpen(){
   public double getClawSpeed(){
     return xboxController.getY(Hand.kRight);
   }
+
 }
 
