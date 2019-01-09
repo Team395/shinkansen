@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.commands.TankDrive;
 
 public class Drivetrain extends Subsystem implements PIDOutput {
 	
@@ -39,8 +40,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-//    	setDefaultCommand(new TankDrive());
-//TODO: Uncomment
+   		setDefaultCommand(new TankDrive());
     }
     
     public void tankDrive(double leftSpeed, double rightSpeed) {
