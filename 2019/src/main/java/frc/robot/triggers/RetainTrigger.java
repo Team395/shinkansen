@@ -16,6 +16,7 @@ import frc.robot.Robot;
 public class RetainTrigger extends Trigger {
   @Override
   public boolean get() {
-    return Robot.intake.isCubeInIntake() && Robot.intake.getCurrentCommand() == null && !Robot.intake.isIntakeOpen();
+//    return Robot.intake.isCubeInIntake() && Robot.intake.getCurrentCommand() == null && !Robot.intake.isIntakeOpen();
+    return false;
   }
 }

@@ -53,21 +53,21 @@ public class OI {
 	ThresholdTrigger thresholdTrigger = new ThresholdTrigger();
 	
 	public void setUpTriggers() {
-		elevatorTrigger = new ElevatorTrigger();
-		elevatorTrigger.whenActive(new ElevatorJoystick());
-		highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
-		normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
-		lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
-		switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
-        bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
+		//elevatorTrigger = new ElevatorTrigger();
+		//elevatorTrigger.whenActive(new ElevatorJoystick());
+		//highScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.HIGH_SCALE));
+		//normalScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.NORMAL_SCALE));
+		//lowScaleHeight.whenPressed(new ElevatorPreset(PresetHeight.LOW_SCALE));
+		//switchHeight.whenPressed(new ElevatorPreset(PresetHeight.SWITCH));
+        //bottomHeight.whenPressed(new ElevatorPreset(PresetHeight.BOTTOM));
         
         //Intake Triggers
-        manualTrigger.whenActive(new ManualIntake());
-        autoscoreButton.whenPressed(new AutoscoreIntake());
+        //manualTrigger.whenActive(new ManualIntake());
+        //autoscoreButton.whenPressed(new AutoscoreIntake());
         //retainTrigger.whenActive(new RetainIntake());
-        automaticTrigger.whenActive(new AutomaticIntake());
-        thresholdTrigger.whenActive(new AutomaticIntake());
-		toggleManual.whenPressed(new ToggleIntakeCommand());
+        //automaticTrigger.whenActive(new AutomaticIntake());
+        //thresholdTrigger.whenActive(new AutomaticIntake());
+		//toggleManual.whenPressed(new ToggleIntakeCommand());
     }
 	
 	public double getLeftY() {

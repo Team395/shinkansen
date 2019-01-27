@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class AutoSearchForCube extends Command {
   public AutoSearchForCube() {
       super("AutoSearchForCube");
-      requires(Robot.intake);
+    //   requires(Robot.intake);
       // Use requires() here to declare subsystem dependencies
       // eg. requires(chassis);
   }
@@ -21,19 +21,20 @@ public class AutoSearchForCube extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-      Robot.intake.openIntake();
+    //   Robot.intake.openIntake();
   }
   
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      Robot.intake.setIntakeSpeed(Robot.oi.getIntakeThrottle());
+    //   Robot.intake.setIntakeSpeed(Robot.oi.getIntakeThrottle());
   }
   
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-      return Robot.intake.isCubeInIntake();
+    //   return Robot.intake.isCubeInIntake();
+    return false;
   }
   
   // Called once after isFinished returns true

@@ -21,13 +21,13 @@ public class ToggleIntakeCommand extends Command {
   @Override
   protected void initialize() {
     System.out.println("Initialized");
-		if(Robot.intake.getCurrentCommandName().equals("ManualIntake")) {
-			System.out.println("Toggled Auto");
-			Scheduler.getInstance().add(new AutomaticIntake());
-		} else {
-			System.out.println("Toggled Manual");
-			Scheduler.getInstance().add(new ManualIntake());
-		}
+		// if(Robot.intake.getCurrentCommandName().equals("ManualIntake")) {
+		// 	System.out.println("Toggled Auto");
+		// 	Scheduler.getInstance().add(new AutomaticIntake());
+		// } else {
+		// 	System.out.println("Toggled Manual");
+		// 	Scheduler.getInstance().add(new ManualIntake());
+		// }
   }
 
   // Called repeatedly when this Command is scheduled to run

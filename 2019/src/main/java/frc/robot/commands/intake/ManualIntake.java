@@ -13,7 +13,7 @@ import frc.robot.Robot;
 public class ManualIntake extends Command {
   public ManualIntake() {
       super("ManualIntake");
-      requires(Robot.intake);
+//      requires(Robot.intake);
 
       setInterruptible(true);
       // Use requires() here to declare subsystem dependencies
@@ -28,13 +28,13 @@ public class ManualIntake extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-      if(Robot.oi.getCloseIntake()) {
-          Robot.intake.closeIntake();
-      }
-      if(Robot.oi.getOpenIntake()) {
-          Robot.intake.openIntake();
-      }
-      Robot.intake.setIntakeSpeed(Robot.oi.getIntakeThrottle());
+    //   if(Robot.oi.getCloseIntake()) {
+    //       Robot.intake.closeIntake();
+    //   }
+    //   if(Robot.oi.getOpenIntake()) {
+    //       Robot.intake.openIntake();
+    //   }
+    //   Robot.intake.setIntakeSpeed(Robot.oi.getIntakeThrottle());
   }
   
   // Make this return true when this Command no longer needs to run execute()

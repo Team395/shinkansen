@@ -16,6 +16,7 @@ import frc.robot.Robot;
 public class AutomaticTrigger extends Trigger {
   @Override
   public boolean get() {
-    return Robot.intake.getCurrentCommand() == null && !Robot.intake.isCubeInIntake() && !Robot.elevator.isElevatorAboveIntakeThreshold();
+//    return Robot.intake.getCurrentCommand() == null && !Robot.intake.isCubeInIntake() && !Robot.elevator.isElevatorAboveIntakeThreshold();
+return false;
   }
 }

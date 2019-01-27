@@ -38,13 +38,13 @@ public class ElevatorPreset extends Command {
     public ElevatorPreset(PresetHeight presetHeight) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.elevator);
+    	// requires(Robot.elevator);
 		this.height = presetHeight.getHeight();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.setElevatorSetpoint(height);
+    	// Robot.elevator.setElevatorSetpoint(height);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -53,7 +53,8 @@ public class ElevatorPreset extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevator.onTarget();
+        // return Robot.elevator.onTarget();
+        return false;
     }
 
     // Called once after isFinished returns true

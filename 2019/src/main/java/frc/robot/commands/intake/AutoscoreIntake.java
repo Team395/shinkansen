@@ -24,7 +24,7 @@ public class AutoscoreIntake extends Command {
 
   public AutoscoreIntake(double throttle) {
       super("AutoscoreIntake");
-      requires(Robot.intake);
+    //   requires(Robot.intake);
       this.throttle = throttle;
       // Use requires() here to declare subsystem dependencies
       // eg. requires(chassis);
@@ -36,7 +36,7 @@ public class AutoscoreIntake extends Command {
       timer.reset();
       timer.start();
 
-      Robot.intake.setIntakeSpeed(throttle);
+    //   Robot.intake.setIntakeSpeed(throttle);
   }
   
   // Called repeatedly when this Command is scheduled to run
@@ -53,8 +53,8 @@ public class AutoscoreIntake extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-      Robot.intake.setIntakeSpeed(0);
-      Robot.intake.openIntake();
+    //   Robot.intake.setIntakeSpeed(0);
+    //   Robot.intake.openIntake();
   }
   
   // Called when another command which requires one or more of the same

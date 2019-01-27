@@ -15,6 +15,7 @@ import frc.robot.Robot;
 public class ThresholdTrigger extends Trigger {
   @Override
   public boolean get() {
-    return !Robot.intake.isCubeInIntake() && !Robot.elevator.isElevatorAboveIntakeThreshold();
+//    return !Robot.intake.isCubeInIntake() && !Robot.elevator.isElevatorAboveIntakeThreshold();
+    return false;
   }
 }

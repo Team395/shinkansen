@@ -19,7 +19,7 @@ public class AutoCenterCube extends Command {
   
   public AutoCenterCube() {
       super("AutoCenterCube");
-      requires(Robot.intake);
+    //   requires(Robot.intake);
       // Use requires() here to declare subsystem dependencies
       // eg. requires(chassis);
   }
@@ -29,7 +29,7 @@ public class AutoCenterCube extends Command {
   protected void initialize() {
       timer.reset();
       timer.start();
-      Robot.intake.setIntakeSpeed(-1);
+    //   Robot.intake.setIntakeSpeed(-1);
   }
   
   // Called repeatedly when this Command is scheduled to run
@@ -40,15 +40,16 @@ public class AutoCenterCube extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-      return timer.get() > CENTER_TIME || !Robot.intake.isCubeInIntake();
+    //   return timer.get() > CENTER_TIME || !Robot.intake.isCubeInIntake();
+    return false;
   }
   
   // Called once after isFinished returns true
   @Override
   protected void end() {
-      if(!Robot.intake.isCubeInIntake()) {
-          Scheduler.getInstance().add(new AutomaticIntake());
-      }
+    //   if(!Robot.intake.isCubeInIntake()) {
+    //       Scheduler.getInstance().add(new AutomaticIntake());
+    //   }
   }
   
   // Called when another command which requires one or more of the same

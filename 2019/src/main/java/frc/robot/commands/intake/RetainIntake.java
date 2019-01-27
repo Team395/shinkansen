@@ -18,7 +18,7 @@ public class RetainIntake extends Command {
 
   public RetainIntake() {
       super("RetainIntake");
-      requires(Robot.intake);
+    //   requires(Robot.intake);
       // Use requires() here to declare subsystem dependencies
       // eg. requires(chassis);
   }
@@ -34,42 +34,43 @@ public class RetainIntake extends Command {
   @Override
   protected void execute() {
       //Reset the timer if it is longer than one period
-      if(timer.get() > RETAIN_PERIOD_LENGTH) {
-          timer.reset();
-      }
+    //   if(timer.get() > RETAIN_PERIOD_LENGTH) {
+    //       timer.reset();
+    //   }
 
-      //If the timer is in the first RETAIN_DUTY_CYCLE fraction of one period, retain the cube
-      if(timer.get() < RETAIN_PERIOD_LENGTH * RETAIN_DUTY_CYCLE) {
-          Robot.intake.setIntakeSpeed(-1);
-      } else {
-          Robot.intake.setIntakeSpeed(0);
-      }
+    //   //If the timer is in the first RETAIN_DUTY_CYCLE fraction of one period, retain the cube
+    //   if(timer.get() < RETAIN_PERIOD_LENGTH * RETAIN_DUTY_CYCLE) {
+    //       Robot.intake.setIntakeSpeed(-1);
+    //   } else {
+    //       Robot.intake.setIntakeSpeed(0);
+    //   }
 
-      //If a manual command is made, honor it
-      if(Robot.oi.getIntakeThrottle() != 0) {
-          Robot.intake.setIntakeSpeed(Robot.oi.getIntakeThrottle());
-      }
+    //   //If a manual command is made, honor it
+    //   if(Robot.oi.getIntakeThrottle() != 0) {
+    //       Robot.intake.setIntakeSpeed(Robot.oi.getIntakeThrottle());
+    //   }
       
-      if(Robot.oi.getOpenIntake()) {
-          Robot.intake.openIntake();
-      }
+    //   if(Robot.oi.getOpenIntake()) {
+    //       Robot.intake.openIntake();
+    //   }
 
-      if(Robot.oi.getCloseIntake()) {
-          Robot.intake.closeIntake();
-      }
+    //   if(Robot.oi.getCloseIntake()) {
+    //       Robot.intake.closeIntake();
+    //   }
   }
   
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-      return !Robot.intake.isCubeInIntake();
+    //   return !Robot.intake.isCubeInIntake();
+    return false;
   }
   
   // Called once after isFinished returns true
   @Override
   protected void end() {
       System.out.println("Retain Ended");
-      Robot.intake.setIntakeSpeed(0);
+    //   Robot.intake.setIntakeSpeed(0);
   }
   
   // Called when another command which requires one or more of the same
