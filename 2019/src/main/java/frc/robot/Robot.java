@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
     
 	//public static Compressor compressor = new Compressor();
 
-	//public static Elevator elevator = new Elevator();
+	public static Elevator elevator = new Elevator();
 	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
 	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();
 	
@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		//elevator.initializeSystem();
+		elevator.initializeSystem();
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		//elevator.initializeSystem();
+		elevator.initializeSystem();
 	}
 
 	/**
@@ -114,8 +114,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		//SmartDashboard.putBoolean("Elevator Trigger", oi.elevatorTrigger.get());
-		//SmartDashboard.putString("Elevator Command", elevator.getCurrentCommandName());
+		SmartDashboard.putBoolean("Elevator Trigger", oi.elevatorTrigger.get());
+		SmartDashboard.putString("Elevator Command", elevator.getCurrentCommandName());
 		//SmartDashboard.putString("Intake Command", intake.getCurrentCommandName());
 		SmartDashboard.putString("Drivetrain Command", drivetrain.getCurrentCommandName());
 		//SmartDashboard.putBoolean("Cube In Intake", intake.isCubeInIntake());

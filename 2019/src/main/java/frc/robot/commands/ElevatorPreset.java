@@ -16,10 +16,10 @@ public class ElevatorPreset extends Command {
 	
 	
 	public enum PresetHeight {	
-		HIGH_SCALE(77), 
-		NORMAL_SCALE(70),
-		LOW_SCALE(61),
-		SWITCH(30),
+		HIGH_SCALE(64), 
+		NORMAL_SCALE(42),
+		LOW_SCALE(22),
+		SWITCH(22),
 		BOTTOM(0);
 		//TODO: retune 
 		
@@ -38,13 +38,13 @@ public class ElevatorPreset extends Command {
     public ElevatorPreset(PresetHeight presetHeight) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	// requires(Robot.elevator);
+    	requires(Robot.elevator);
 		this.height = presetHeight.getHeight();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	// Robot.elevator.setElevatorSetpoint(height);
+    	Robot.elevator.setElevatorSetpoint(height);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -53,8 +53,7 @@ public class ElevatorPreset extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        // return Robot.elevator.onTarget();
-        return false;
+        return Robot.elevator.onTarget();
     }
 
     // Called once after isFinished returns true
