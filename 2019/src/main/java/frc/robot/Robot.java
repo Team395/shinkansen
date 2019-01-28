@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
     //public static Intake intake = new Intake();
     
 	//public static Compressor compressor = new Compressor();
-
+	public static Intake2019 intake2019 = new Intake2019();
 	public static Elevator elevator = new Elevator();
 	public static DrivetrainEncoders drivetrainEncoders = new DrivetrainEncoders();
 	public static DrivetrainGyro drivetrainGyro = new DrivetrainGyro();

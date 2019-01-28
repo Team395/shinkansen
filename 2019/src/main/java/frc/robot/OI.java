@@ -92,8 +92,15 @@ public class OI {
 
     public double getIntakeThrottle() {
         return INVERT * xboxController.getY(Hand.kRight);
-    }
+	}
+	
+	public boolean getInnerRollerIn() {
+		return xboxController.getBumper(Hand.kLeft);
+	}
 
+	public boolean getInnerRollerOut() {
+		return xboxController.getBumper(Hand.kRight);
+	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

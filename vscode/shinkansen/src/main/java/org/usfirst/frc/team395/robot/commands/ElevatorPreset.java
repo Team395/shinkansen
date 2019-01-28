@@ -1,6 +1,7 @@
 package org.usfirst.frc.team395.robot.commands;
 
 import org.usfirst.frc.team395.robot.Robot;
+import org.usfirst.frc.team395.robot.Subsystems;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -35,7 +36,8 @@ public class ElevatorPreset extends Command {
     public ElevatorPreset(PresetHeight presetHeight) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.elevator);
+        requires(Robot.elevator);
+        requires(Subsystems.Elevator());
 		this.height = presetHeight.getHeight();
     }
 
